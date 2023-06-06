@@ -13,9 +13,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.SiteDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.SiteDto;
-import lk.ijse.construction.dao.custom.impl.SiteDaoImpl;
 
 import java.time.LocalDate;
 
@@ -44,6 +45,9 @@ public class SiteRegistrationController {
     public JFXButton btnSearchOnAction;
     public DatePicker dtpDate;
     String SerialId="";
+
+
+    SiteDao siteDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SITE_DAO);
 
     @FXML
     void initialize() {
@@ -178,13 +182,13 @@ public class SiteRegistrationController {
     public void loadSiteIds(){
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = SiteDaoImpl.loadIds();
+            List<String> ids = siteDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbSearchId.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -194,7 +198,7 @@ public class SiteRegistrationController {
         String id=String.valueOf(cmbSearchId.getValue());
 
         try {
-            SiteDto site = SiteDaoImpl.searchById(id);
+            SiteDto site = siteDao.searchById(id);
             txtSiteName.setText(site.getSite_name());
             txtLane.setText(site.getLocation());
             txtConact.setText(site.getContact_person());
@@ -204,7 +208,7 @@ public class SiteRegistrationController {
             DateTimeFormatter dtf=DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dt=LocalDate.parse(sdate,dtf);
             dtpDate.setValue(dt);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

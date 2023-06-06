@@ -14,7 +14,7 @@ public class DaoFactory {
 
     public enum DaoType{
         BILL_DAO,CONSTRUCTION_DAO,EMPLOYEE_REGISTRATION_DAO,END_SITE_DAO,HARDWARE_CUSTOMER_DAO,HARDWARE_ITEMS_ADD_DAO,
-        ITEM_LIST_DAO
+        ITEM_LIST_DAO,SITE_DAO
     }
     public <T extends SuperDao>T getDao(DaoType type){
         switch (type){
@@ -25,6 +25,7 @@ public class DaoFactory {
             case HARDWARE_CUSTOMER_DAO: return (T) new HardwareCustomerDaoImpl();
             case HARDWARE_ITEMS_ADD_DAO: return (T) new HardwareItemAddDaoImpl();
             case ITEM_LIST_DAO: return (T) new ItemListDaoImpl();
+            case SITE_DAO: return (T) new SiteDaoImpl();
             default:return null;
         }
     }
