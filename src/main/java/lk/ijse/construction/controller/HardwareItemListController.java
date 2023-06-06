@@ -2,7 +2,6 @@ package lk.ijse.construction.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTreeTableView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,17 +14,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dto.Employee;
-import lk.ijse.construction.dto.ItemTM;
-import lk.ijse.construction.dto.Items;
-import lk.ijse.construction.model.EmployeeRegistrationModel;
-import lk.ijse.construction.model.HardwareItemAddModel;
-import lk.ijse.construction.model.ItemListModel;
+import lk.ijse.construction.model.tm.ItemTM;
+import lk.ijse.construction.model.ItemsDto;
+import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
+import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 
 public class HardwareItemListController {
     public AnchorPane itemListPane;
@@ -45,7 +41,7 @@ public class HardwareItemListController {
     private void loadItemCatogories() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddModel.loadIds();
+            List<String> ids = HardwareItemAddDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -71,9 +67,9 @@ public class HardwareItemListController {
 
         try {
             ObservableList<ItemTM> obList = FXCollections.observableArrayList();
-            List<Items> IList = ItemListModel.getAll(id);
+            List<ItemsDto> IList = ItemListDaoImpl.getAll(id);
 
-            for (Items itm : IList) {
+            for (ItemsDto itm : IList) {
                 obList.add(new ItemTM(
                         itm.getItem_Id(),
                         itm.getItem_name(),

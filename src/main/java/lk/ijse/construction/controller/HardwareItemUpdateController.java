@@ -13,11 +13,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
+import lk.ijse.construction.dao.custom.impl.ItemNameTakeDaoImpl;
+import lk.ijse.construction.dao.custom.impl.SupplierNameDaoImpl;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.ItemCall;
-import lk.ijse.construction.dto.ItemL;
-import lk.ijse.construction.dto.SupName;
-import lk.ijse.construction.model.*;
+import lk.ijse.construction.model.ItemCallDto;
+import lk.ijse.construction.model.ItemLDto;
+import lk.ijse.construction.model.SupNameDto;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -58,7 +60,7 @@ public class HardwareItemUpdateController {
     private void loadCatIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddModel.loadIds();
+            List<String> ids = HardwareItemAddDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -73,9 +75,9 @@ public class HardwareItemUpdateController {
         String id=String.valueOf(cmbItemCategory.getValue().toString());
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<ItemL> ids = ItemNameTakeModel.getList(id);
+            List<ItemLDto> ids = ItemNameTakeDaoImpl.getList(id);
 
-            for (ItemL idm : ids) {
+            for (ItemLDto idm : ids) {
                 obList.add(idm.getItem_name());
             }
             cmbItem.setItems(obList);
@@ -117,7 +119,7 @@ public class HardwareItemUpdateController {
 
         try {
             if (cmbItem.getValue()!=null) {
-                ItemCall IC = ItemNameTakeModel.searchById(id);
+                ItemCallDto IC = ItemNameTakeDaoImpl.searchById(id);
                 lblItemId.setText(IC.getItem_Id());
             }
         } catch (SQLException e) {
@@ -128,9 +130,9 @@ public class HardwareItemUpdateController {
         String sup=String.valueOf(cmbItem.getValue());
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<SupName> ids = SupplierNameModel.getList(sup);
+            List<SupNameDto> ids = SupplierNameDaoImpl.getList(sup);
 
-            for (SupName idm : ids) {
+            for (SupNameDto idm : ids) {
                 obList.add(idm.getSupplier_name());
             }
             cmbSupplier.setItems(obList);

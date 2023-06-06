@@ -7,22 +7,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.Employee;
-import lk.ijse.construction.model.EmployeeRegistrationModel;
+import lk.ijse.construction.model.EmployeeDto;
+import lk.ijse.construction.dao.custom.impl.EmployeeRegistrationDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
-import java.util.Properties;
-
 
 
 public class EmployeeRegistrationController{
@@ -73,7 +69,7 @@ public class EmployeeRegistrationController{
     private void loadEmpIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = EmployeeRegistrationModel.loadIds();
+            List<String> ids = EmployeeRegistrationDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -90,7 +86,7 @@ public class EmployeeRegistrationController{
         String id=String.valueOf(cmbEmployeeId.getValue());
 
         try {
-            Employee employee = EmployeeRegistrationModel.searchById(id);
+            EmployeeDto employee = EmployeeRegistrationDaoImpl.searchById(id);
             txtfname.setText(employee.getEmpName());
             txtdesignation.setText(employee.getDesignation());
             txtcontactno.setText(employee.getContact_no());

@@ -14,21 +14,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.EndSite;
-import lk.ijse.construction.dto.Site;
-import lk.ijse.construction.model.EndSiteModel;
-import lk.ijse.construction.model.SiteModel;
+import lk.ijse.construction.model.EndSiteDto;
+import lk.ijse.construction.dao.custom.impl.EndSiteDaoImpl;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Properties;
 
 public class SiteEndFormController {
     public AnchorPane finishSitePane;
@@ -59,7 +55,7 @@ public class SiteEndFormController {
 
         try{
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = EndSiteModel.loadIds();
+            List<String> ids = EndSiteDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -121,7 +117,7 @@ public class SiteEndFormController {
         String id=String.valueOf(cmbSiteName.getValue());
 
         try {
-            EndSite Esite = EndSiteModel.searchById(id);
+            EndSiteDto Esite = EndSiteDaoImpl.searchById(id);
             if (Esite!=null) {
                 lblSiteStartDate.setText(Esite.getStart_date());
             }

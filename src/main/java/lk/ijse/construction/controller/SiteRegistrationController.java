@@ -14,10 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.Employee;
-import lk.ijse.construction.dto.Site;
-import lk.ijse.construction.model.EmployeeRegistrationModel;
-import lk.ijse.construction.model.SiteModel;
+import lk.ijse.construction.model.SiteDto;
+import lk.ijse.construction.dao.custom.impl.SiteDaoImpl;
 
 import java.time.LocalDate;
 
@@ -25,7 +23,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Properties;
 
 public class SiteRegistrationController {
 
@@ -181,7 +178,7 @@ public class SiteRegistrationController {
     public void loadSiteIds(){
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = SiteModel.loadIds();
+            List<String> ids = SiteDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -197,7 +194,7 @@ public class SiteRegistrationController {
         String id=String.valueOf(cmbSearchId.getValue());
 
         try {
-            Site site = SiteModel.searchById(id);
+            SiteDto site = SiteDaoImpl.searchById(id);
             txtSiteName.setText(site.getSite_name());
             txtLane.setText(site.getLocation());
             txtConact.setText(site.getContact_person());

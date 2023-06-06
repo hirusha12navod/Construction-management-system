@@ -14,15 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.Employee;
-import lk.ijse.construction.dto.SupplierTm;
-import lk.ijse.construction.model.EmployeeRegistrationModel;
-import lk.ijse.construction.model.ItemListModel;
-import lk.ijse.construction.model.SupplierModel;
+import lk.ijse.construction.model.tm.SupplierTm;
+import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
+import lk.ijse.construction.dao.custom.impl.SupplierDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 public class HardwareSupplierRegController {
 
@@ -58,7 +55,7 @@ public class HardwareSupplierRegController {
         btnUpdateOnAction.setDisable(true);
 
         try {
-            cmbItemOnAction.setItems(ItemListModel.getAll());
+            cmbItemOnAction.setItems(ItemListDaoImpl.getAll());
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -91,7 +88,7 @@ public class HardwareSupplierRegController {
 
     private void loadAllSuppliers() {
         try {
-            tmList = SupplierModel.getAll();
+            tmList = SupplierDaoImpl.getAll();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -144,7 +141,7 @@ public class HardwareSupplierRegController {
                     tm.setContact(Integer.parseInt(txtSupplierContact.getText()));
                     tm.setItem(cmbItemOnAction.getValue().toString());
 
-                    Boolean isUpdated = SupplierModel.update(tm);
+                    Boolean isUpdated = SupplierDaoImpl.update(tm);
                     if (isUpdated) {
                         tblSupplier.refresh();
                         new Alert(Alert.AlertType.INFORMATION, "updated..!").show();
@@ -185,7 +182,7 @@ public class HardwareSupplierRegController {
                 cmbItemOnAction.getValue().toString()
         );
         try {
-            Boolean isSaved = SupplierModel.save(supplierTm);
+            Boolean isSaved = SupplierDaoImpl.save(supplierTm);
             if (isSaved) {
                 clearFields();
             }

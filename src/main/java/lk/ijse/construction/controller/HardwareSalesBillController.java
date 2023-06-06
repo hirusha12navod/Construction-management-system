@@ -10,14 +10,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.BillDao;
+import lk.ijse.construction.dao.custom.impl.HardwareCustomerDaoImpl;
+import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
+import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.*;
 import lk.ijse.construction.model.*;
+import lk.ijse.construction.model.tm.BillTm;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.design.JRDesignElement;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
@@ -26,9 +29,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 public class HardwareSalesBillController {
     public Label lblTotalPrice;
@@ -51,6 +52,8 @@ public class HardwareSalesBillController {
     public AnchorPane mainPane;
     public JFXButton back;
     String SerialId="";
+
+    BillDao billDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.BILL_DAO);
 
 
     @FXML
@@ -77,10 +80,10 @@ public class HardwareSalesBillController {
 
     private void loadCusIds() {
         try {
-            List<String> ids = HardwareCustomerModel.loadIds();
+            List<String> ids = HardwareCustomerDaoImpl.loadIds();
             ObservableList<String> names = FXCollections.observableArrayList();
             for (String id : ids) {
-                names.add(HardwareCustomerModel.getName(id));
+                names.add(HardwareCustomerDaoImpl.getName(id));
             }
             cmbBillCustomer.setItems(names);
         } catch (SQLException e) {
@@ -111,7 +114,7 @@ public class HardwareSalesBillController {
     private void loadCatIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddModel.loadIds();
+            List<String> ids = HardwareItemAddDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -155,7 +158,7 @@ public class HardwareSalesBillController {
             connection.setAutoCommit(false);
             Boolean alert = false;
             for (int i = 0; i < tmList.size(); i++) {
-                Boolean isUpdated = ItemListModel.updateStock(ItemListModel.getQty(tmList.get(i).getName()) - tmList.get(i).getQty(), tmList.get(i).getName());
+                Boolean isUpdated = ItemListDaoImpl.updateStock(ItemListDaoImpl.getQty(tmList.get(i).getName()) - tmList.get(i).getQty(), tmList.get(i).getName());
                 if (!isUpdated){
                     alert = true;
                 }
@@ -173,14 +176,14 @@ public class HardwareSalesBillController {
                             tm.getAmount()
                     ));
                 }
-                Boolean isOrderPlaced = BillModel.save(new SalesDto(
+                Boolean isOrderPlaced = billDao.save(new SalesDto(
                         lblBillNo.getText(),
                         cmbBillCustomer.getValue().toString(),
                         Double.parseDouble(lblTotalPrice.getText()),
                         list
                         ));
                 if (isOrderPlaced) {
-                    Boolean detailSaved = BillModel.saveDetails(
+                    Boolean detailSaved = billDao.saveDetails(
                             new SalesDto(
                                     lblBillNo.getText(),
                                     cmbBillCustomer.getValue().toString(),
@@ -195,7 +198,7 @@ public class HardwareSalesBillController {
                     }
                 }
             }
-        }catch (SQLException e){
+        }catch (SQLException | ClassNotFoundException e){
             connection.rollback();
             e.printStackTrace();
         }
@@ -227,9 +230,9 @@ public class HardwareSalesBillController {
 
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<ItemL> ids = ItemListModel.getList(id);
+            List<ItemLDto> ids = ItemListDaoImpl.getList(id);
 
-            for (ItemL idm : ids) {
+            for (ItemLDto idm : ids) {
                 obList.add(idm.getItem_name());
             }
             cmbItem.setItems(obList);
@@ -242,7 +245,7 @@ public class HardwareSalesBillController {
     public void cmbItemOnAction(ActionEvent actionEvent) {
         if (cmbItem.getValue()!=null) {
             try {
-                txtPrice.setText(String.valueOf(ItemListModel.getPrice(cmbItem.getValue().toString() != null ? cmbItem.getValue().toString() : "")));
+                txtPrice.setText(String.valueOf(ItemListDaoImpl.getPrice(cmbItem.getValue().toString() != null ? cmbItem.getValue().toString() : "")));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

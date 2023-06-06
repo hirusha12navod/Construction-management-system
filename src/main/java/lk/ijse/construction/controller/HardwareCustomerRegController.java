@@ -12,20 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import com.jfoenix.controls.JFXTextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.Employee;
-import lk.ijse.construction.dto.HardwareCustomer;
-import lk.ijse.construction.model.EmployeeRegistrationModel;
-import lk.ijse.construction.model.HardwareCustomerModel;
+import lk.ijse.construction.model.HardwareCustomerDto;
+import lk.ijse.construction.dao.custom.impl.HardwareCustomerDaoImpl;
 
-import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
-import java.util.Properties;
 
 public class HardwareCustomerRegController {
 
@@ -66,7 +61,7 @@ public class HardwareCustomerRegController {
     private void loadCustomerIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareCustomerModel.loadIds();
+            List<String> ids = HardwareCustomerDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -83,7 +78,7 @@ public class HardwareCustomerRegController {
         String id=String.valueOf(cmbCId.getValue());
 
         try {
-            HardwareCustomer customer = HardwareCustomerModel.searchById(id);
+            HardwareCustomerDto customer = HardwareCustomerDaoImpl.searchById(id);
             txtCName.setText(customer.getName());
             lblCustomerId.setText(customer.getCustomer_Id());
             txtConNo.setText(customer.getContact());

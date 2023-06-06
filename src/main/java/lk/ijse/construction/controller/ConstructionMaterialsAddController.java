@@ -8,19 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dto.ItemL;
-import lk.ijse.construction.model.ConstructionModel;
-import lk.ijse.construction.model.HardwareItemAddModel;
-import lk.ijse.construction.model.ItemListModel;
+import lk.ijse.construction.dao.custom.impl.ConstructionDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConstructionMaterialsAddController {
     public Label lblStock;
@@ -54,7 +49,7 @@ public class ConstructionMaterialsAddController {
 
         cmbMaterial.setOnAction(actionEvent -> {
             try {
-                lblStock.setText(String.valueOf(ConstructionModel.getStock(cmbMaterial.getValue().toString())));
+                lblStock.setText(String.valueOf(ConstructionDaoImpl.getStock(cmbMaterial.getValue().toString())));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -73,8 +68,8 @@ public class ConstructionMaterialsAddController {
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (!txtQty.getText().isEmpty() && !cmbMaterial.getValue().toString().isEmpty()){
             try {
-                ConstructionModel.updateStock(Double.parseDouble(lblStock.getText()) + Double.parseDouble(txtQty.getText()),cmbMaterial.getValue().toString());
-                lblStock.setText(String.valueOf(ConstructionModel.getStock(cmbMaterial.getValue().toString())));
+                ConstructionDaoImpl.updateStock(Double.parseDouble(lblStock.getText()) + Double.parseDouble(txtQty.getText()),cmbMaterial.getValue().toString());
+                lblStock.setText(String.valueOf(ConstructionDaoImpl.getStock(cmbMaterial.getValue().toString())));
             }catch (SQLException e){
                 e.printStackTrace();
             }

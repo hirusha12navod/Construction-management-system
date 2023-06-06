@@ -11,9 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dto.ItemL;
-import lk.ijse.construction.model.HardwareItemAddModel;
-import lk.ijse.construction.model.ItemListModel;
+import lk.ijse.construction.model.ItemLDto;
+import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
+import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,7 +31,7 @@ public class HardwareItemSearchController {
     public void initialize(){
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddModel.loadIds();
+            List<String> ids = HardwareItemAddDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -41,17 +41,17 @@ public class HardwareItemSearchController {
             cmbCat.setOnAction(actionEvent -> {
                 try {
                     ObservableList<String> list = FXCollections.observableArrayList();
-                    List<ItemL> names = ItemListModel.getList(cmbCat.getValue().toString());
+                    List<ItemLDto> names = ItemListDaoImpl.getList(cmbCat.getValue().toString());
 
-                    for (ItemL idm : names) {
+                    for (ItemLDto idm : names) {
                         list.add(idm.getItem_name());
                     }
                     cmbItem.setItems(list);
 
                     cmbItem.setOnAction(actionEvent1 -> {
                         try {
-                            lblPrice.setText(String.valueOf(ItemListModel.getPrice(cmbItem.getValue().toString())));
-                            lblRack.setText(String.valueOf(ItemListModel.getRack(cmbItem.getValue().toString())));
+                            lblPrice.setText(String.valueOf(ItemListDaoImpl.getPrice(cmbItem.getValue().toString())));
+                            lblRack.setText(String.valueOf(ItemListDaoImpl.getRack(cmbItem.getValue().toString())));
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }

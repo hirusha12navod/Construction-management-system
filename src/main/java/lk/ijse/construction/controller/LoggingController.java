@@ -8,16 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dto.User;
-import lk.ijse.construction.model.UserModel;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 public class LoggingController {
     public JFXButton btnLogging;

@@ -10,13 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dto.MaterialTm;
-import lk.ijse.construction.model.ConstructionModel;
+import lk.ijse.construction.model.tm.MaterialTm;
+import lk.ijse.construction.dao.custom.impl.ConstructionDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
 
 public class ConstructionMaterialsListController {
 
@@ -34,7 +32,7 @@ public class ConstructionMaterialsListController {
         clmMaterialName.setCellValueFactory(new PropertyValueFactory<>("material_name"));
         clmMaterilStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         try {
-            ObservableList<MaterialTm> all = ConstructionModel.getAll();
+            ObservableList<MaterialTm> all = ConstructionDaoImpl.getAll();
             tblMaterial.setItems(all);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

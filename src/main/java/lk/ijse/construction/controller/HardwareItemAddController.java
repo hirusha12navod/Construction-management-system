@@ -8,25 +8,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.model.HardwareItemAddModel;
+import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
 
-import javax.swing.*;
-import javax.xml.transform.Result;
 import java.awt.*;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
-import java.util.Properties;
 
 public class HardwareItemAddController extends Component {
 
@@ -58,7 +53,7 @@ public class HardwareItemAddController extends Component {
     private void loadItemCatogories() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddModel.loadIds();
+            List<String> ids = HardwareItemAddDaoImpl.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
