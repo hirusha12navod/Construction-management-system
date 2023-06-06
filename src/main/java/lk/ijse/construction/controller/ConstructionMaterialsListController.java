@@ -11,8 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ConstructionDao;
+import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.custom.ConstructionBo;
 import lk.ijse.construction.model.MaterialDto;
 import lk.ijse.construction.model.tm.MaterialTm;
 
@@ -30,7 +30,8 @@ public class ConstructionMaterialsListController {
     public AnchorPane materialsListPane;
     String SerialId="";
 
-    ConstructionDao constructionDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.CONSTRUCTION_DAO);
+//    ConstructionDao constructionDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.CONSTRUCTION_DAO);
+    ConstructionBo constructionBo = BoFactory.getInstance().getBo(BoFactory.BoType.CONSTRUCTION_BO);
 
     @FXML
     public void initialize(){
@@ -38,7 +39,7 @@ public class ConstructionMaterialsListController {
         clmMaterilStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         try {
             ObservableList<MaterialTm> all = FXCollections.observableArrayList();
-            for (MaterialDto material:constructionDao.getAll()) {
+            for (MaterialDto material:constructionBo.getAll()) {
                 all.add(new MaterialTm(
                         material.getMaterial_name(),
                         material.getStock()

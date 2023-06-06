@@ -1,12 +1,14 @@
-package lk.ijse.construction.dao.custom;
+package lk.ijse.construction.bo.custom;
 
-import lk.ijse.construction.dao.CrudDao;
-import lk.ijse.construction.entity.Constructionst;
+import lk.ijse.construction.bo.SuperBo;
 import lk.ijse.construction.model.MaterialDto;
 
 import java.sql.SQLException;
+import java.util.List;
 
-public interface ConstructionDao extends CrudDao<Constructionst,String> {
+public interface ConstructionBo extends SuperBo {
     double getStock(String material) throws SQLException, ClassNotFoundException;
     boolean updateStock(double stock,String name) throws SQLException, ClassNotFoundException;
+    List<MaterialDto> getAll() throws SQLException, ClassNotFoundException;
+
 }

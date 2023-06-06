@@ -12,8 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ConstructionDao;
+import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.custom.ConstructionBo;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +28,8 @@ public class ConstructionMaterialsAddController {
     public AnchorPane materialsAddPane;
     String SerialId="";
 
-    ConstructionDao constructionDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.CONSTRUCTION_DAO);
+//    ConstructionDao constructionDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.CONSTRUCTION_DAO);
+    ConstructionBo constructionBo = BoFactory.getInstance().getBo(BoFactory.BoType.CONSTRUCTION_BO);
 
     @FXML
     public void initialize(){
@@ -52,7 +53,7 @@ public class ConstructionMaterialsAddController {
 
         cmbMaterial.setOnAction(actionEvent -> {
             try {
-                lblStock.setText(String.valueOf(constructionDao.getStock(cmbMaterial.getValue().toString())));
+                lblStock.setText(String.valueOf(constructionBo.getStock(cmbMaterial.getValue().toString())));
             } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
             }
@@ -71,8 +72,8 @@ public class ConstructionMaterialsAddController {
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (!txtQty.getText().isEmpty() && !cmbMaterial.getValue().toString().isEmpty()){
             try {
-                constructionDao.updateStock(Double.parseDouble(lblStock.getText()) + Double.parseDouble(txtQty.getText()),cmbMaterial.getValue().toString());
-                lblStock.setText(String.valueOf(constructionDao.getStock(cmbMaterial.getValue().toString())));
+                constructionBo.updateStock(Double.parseDouble(lblStock.getText()) + Double.parseDouble(txtQty.getText()),cmbMaterial.getValue().toString());
+                lblStock.setText(String.valueOf(constructionBo.getStock(cmbMaterial.getValue().toString())));
             }catch (SQLException | ClassNotFoundException e){
                 e.printStackTrace();
             }
