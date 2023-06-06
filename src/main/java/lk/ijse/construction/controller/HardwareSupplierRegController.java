@@ -34,8 +34,6 @@ public class HardwareSupplierRegController {
     public TableColumn clmItem;
     public AnchorPane SupplierRegistrationPane;
     public JFXButton back;
-    String SerialId="";
-
 
     public Label lblSupplierId;
     public JFXButton btnUpdateOnAction;
@@ -222,7 +220,7 @@ public class HardwareSupplierRegController {
         txtSupplierContact.clear();
         cmbItemOnAction.setValue("");
         tblSupplier.refresh();
-        loadAllSuppliers();
+        tblSupplier.refresh();
     }
 
 }

@@ -127,9 +127,9 @@ public class ItemListDaoImpl implements ItemListDao {
             list.add(new ItemsDto(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getInt(3),
-                    resultSet.getDouble(4),
-                    resultSet.getString(5)
+                    resultSet.getInt(4),
+                    resultSet.getDouble(5),
+                    resultSet.getString(6)
             ));
         }
         return list;

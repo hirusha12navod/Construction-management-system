@@ -53,12 +53,11 @@ public class SupplierDaoImpl implements SupplierDao {
     @Override
     public boolean update(SupplierDto dto) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
-        String sql = "UPDATE supplier SET supplier_name = ?,contact=?,supplyItems=?";
+        String sql = "UPDATE supplier SET supplier_name = ?,contact=? WHERE supplier_Id=?";
         PreparedStatement lstm=con.prepareStatement(sql);
         lstm.setString(1, dto.getName());
-        lstm.setString(2, dto.getSupplier_id());
-        lstm.setInt(3, dto.getContact());
-
+        lstm.setInt(2, dto.getContact());
+        lstm.setString(3,dto.getSupplier_id());
         return lstm.executeUpdate()>0;
     }
 
@@ -80,7 +79,7 @@ public class SupplierDaoImpl implements SupplierDao {
     @Override
     public List<String> getList(String sup) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
-        String sql = "SELECT supplier_name FROM supplier WHERE supplyItems=?";
+        String sql = "SELECT supplier_name FROM supply WHERE item_name=? LIMIT 1";
         PreparedStatement lstm=con.prepareStatement(sql);
         lstm.setString(1,sup);
 
