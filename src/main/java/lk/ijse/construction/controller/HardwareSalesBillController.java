@@ -12,8 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.bo.custom.BillBo;
+import lk.ijse.construction.bo.custom.BoFactory;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.BillDao;
 import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.ItemListDao;
@@ -53,10 +54,12 @@ public class HardwareSalesBillController {
     public JFXButton back;
     String SerialId="";
 
-    BillDao billDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.BILL_DAO);
+//    BillDao billDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.BILL_DAO);
     HardwareCustomerDao hardwareCustomerDao =DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
     HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
     ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+
+    BillBo billBo = BoFactory.getInstance().getBo(BoFactory.BoType.BILL_BO);
 
     @FXML
     void initialize(){
@@ -178,14 +181,14 @@ public class HardwareSalesBillController {
                             tm.getAmount()
                     ));
                 }
-                Boolean isOrderPlaced = billDao.save(new SalesDto(
+                Boolean isOrderPlaced = billBo.save(new SalesDto(
                         lblBillNo.getText(),
                         cmbBillCustomer.getValue().toString(),
                         Double.parseDouble(lblTotalPrice.getText()),
                         list
                         ));
                 if (isOrderPlaced) {
-                    Boolean detailSaved = billDao.saveDetails(
+                    Boolean detailSaved = billBo.saveDetails(
                             new SalesDto(
                                     lblBillNo.getText(),
                                     cmbBillCustomer.getValue().toString(),
