@@ -1,4 +1,8 @@
 package lk.ijse.construction.dao.custom;
 
-public interface UserDao {
+import lk.ijse.construction.dao.CrudDao;
+import lk.ijse.construction.model.UserDto;
+
+public interface UserDao extends CrudDao<UserDto,String> {
+
 }

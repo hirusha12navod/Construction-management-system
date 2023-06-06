@@ -1,5 +1,6 @@
 package lk.ijse.construction.dao.custom.impl;
 
+import lk.ijse.construction.dao.custom.UserDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.UserDto;
 
@@ -7,11 +8,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl {
+public class UserDaoImpl implements UserDao {
 
     String SerialId = "";
 
-    public static List<UserDto> getAll() throws SQLException {
+    @Override
+    public List<UserDto> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM users";
 
@@ -25,5 +27,35 @@ public class UserDaoImpl {
             ));
         }
         return data;
+    }
+
+    @Override
+    public UserDto get() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(UserDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(UserDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exists(UserDto userDto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String getId() throws SQLException, ClassNotFoundException {
+        return null;
     }
 }
