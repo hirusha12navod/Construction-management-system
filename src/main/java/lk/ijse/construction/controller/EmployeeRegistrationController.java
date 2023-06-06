@@ -13,8 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.EmployeeRegistrationDao;
+import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.custom.EmployeeBo;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.EmployeeDto;
 
@@ -47,7 +47,8 @@ public class EmployeeRegistrationController{
     public JFXComboBox cmbEmployeeId;
     public JFXButton btnSave;
 
-    EmployeeRegistrationDao employeeRegistrationDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.EMPLOYEE_REGISTRATION_DAO);
+//    EmployeeRegistrationDao employeeRegistrationDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.EMPLOYEE_REGISTRATION_DAO);
+    EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoFactory.BoType.EMPLOYEE_BO);
 
     @FXML
     void initialize(){
@@ -72,7 +73,7 @@ public class EmployeeRegistrationController{
     private void loadEmpIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = employeeRegistrationDao.loadIds();
+            List<String> ids = employeeBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -89,7 +90,7 @@ public class EmployeeRegistrationController{
         String id=String.valueOf(cmbEmployeeId.getValue());
 
         try {
-            EmployeeDto employee = employeeRegistrationDao.searchById(id);
+            EmployeeDto employee = employeeBo.searchById(id);
             txtfname.setText(employee.getEmpName());
             txtdesignation.setText(employee.getDesignation());
             txtcontactno.setText(employee.getContact_no());

@@ -2,6 +2,7 @@ package lk.ijse.construction.dao.custom.impl;
 
 import lk.ijse.construction.dao.custom.EmployeeRegistrationDao;
 import lk.ijse.construction.db.DBconnection;
+import lk.ijse.construction.entity.Employee;
 import lk.ijse.construction.model.EmployeeDto;
 
 import java.sql.*;
@@ -13,18 +14,17 @@ public class EmployeeRegistrationDaoImpl implements EmployeeRegistrationDao {
     String SerialId = "";
 
     @Override
-    public List<EmployeeDto> getAll() throws SQLException, ClassNotFoundException {
+    public List<Employee> getAll() throws SQLException, ClassNotFoundException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM Employee";
 
-        List<EmployeeDto> data = new ArrayList<>();
+        List<Employee> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while (resultSet.next()) {
-            data.add(new EmployeeDto(
+            data.add(new Employee(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getString(1),
                     resultSet.getString(3),
                     resultSet.getString(4),
                     resultSet.getString(5),
@@ -36,22 +36,22 @@ public class EmployeeRegistrationDaoImpl implements EmployeeRegistrationDao {
     }
 
     @Override
-    public EmployeeDto get() throws SQLException, ClassNotFoundException {
+    public Employee get() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(EmployeeDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Employee dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(EmployeeDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Employee dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean exists(EmployeeDto employeeDto) throws SQLException, ClassNotFoundException {
+    public boolean exists(Employee employeeDto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -79,7 +79,7 @@ public class EmployeeRegistrationDaoImpl implements EmployeeRegistrationDao {
     }
 
     @Override
-    public EmployeeDto searchById(String id) throws SQLException {
+    public Employee searchById(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT * FROM employee WHERE emp_Id = ?");
@@ -87,10 +87,9 @@ public class EmployeeRegistrationDaoImpl implements EmployeeRegistrationDao {
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return  new EmployeeDto(
+            return  new Employee(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getString(1),
                     resultSet.getString(3),
                     resultSet.getString(4),
                     resultSet.getString(5),
