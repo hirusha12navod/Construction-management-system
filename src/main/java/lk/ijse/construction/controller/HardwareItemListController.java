@@ -16,9 +16,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
+import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.model.tm.ItemTM;
 import lk.ijse.construction.model.ItemsDto;
-import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,6 +40,7 @@ public class HardwareItemListController {
     public TableColumn calPrice;
 
     HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
 
     private void loadItemCatogories() {
         try {
@@ -70,7 +71,7 @@ public class HardwareItemListController {
 
         try {
             ObservableList<ItemTM> obList = FXCollections.observableArrayList();
-            List<ItemsDto> IList = ItemListDaoImpl.getAll(id);
+            List<ItemsDto> IList = itemListDao.getAll(id);
 
             for (ItemsDto itm : IList) {
                 obList.add(new ItemTM(
@@ -82,7 +83,7 @@ public class HardwareItemListController {
                 ));
             }
             tblItems.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

@@ -1,6 +1,5 @@
 package lk.ijse.construction.dao.custom.impl;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemLDto;
 import lk.ijse.construction.model.ItemsDto;
@@ -9,12 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemListDaoImpl {
+public class ItemListDaoImpl implements ItemListDao {
 
-
-
-
-    public static List<ItemLDto> getList(String id) throws SQLException {
+    @Override
+    public List<ItemLDto> getList(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT item_name FROM item WHERE item_category=?";
         PreparedStatement lstm=con.prepareStatement(sql);
@@ -43,7 +40,8 @@ public class ItemListDaoImpl {
         return data;*/
     }
 
-    public static List<ItemsDto> getAll(String id) throws SQLException {
+    @Override
+    public List<ItemsDto> getAll(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT item_Id,item_name,initial_stock,price,rack_no FROM item WHERE item_category=?";
         PreparedStatement lstm=con.prepareStatement(sql);
@@ -64,7 +62,8 @@ public class ItemListDaoImpl {
         return data;
     }
 
-    public static double getPrice(String name) throws SQLException {
+    @Override
+    public double getPrice(String name) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT price FROM item WHERE item_name=?";
         PreparedStatement lstm=con.prepareStatement(sql);
@@ -77,7 +76,8 @@ public class ItemListDaoImpl {
         return 0;
     }
 
-    public static int getQty(String name) throws SQLException {
+    @Override
+    public int getQty(String name) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT initial_stock FROM item WHERE item_name=?";
         PreparedStatement lstm=con.prepareStatement(sql);
@@ -90,7 +90,8 @@ public class ItemListDaoImpl {
         return 0;
     }
 
-    public static boolean updateStock(int qty,String name) throws SQLException {
+    @Override
+    public boolean updateStock(int qty,String name) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "UPDATE item SET initial_stock=? WHERE item_name=?";
         PreparedStatement lstm=con.prepareStatement(sql);
@@ -100,7 +101,8 @@ public class ItemListDaoImpl {
         return lstm.executeUpdate()>0;
     }
 
-    public static String getRack(String name) throws SQLException {
+    @Override
+    public String getRack(String name) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT rack_no FROM item WHERE item_name=?";
         PreparedStatement lstm=con.prepareStatement(sql);
@@ -113,17 +115,54 @@ public class ItemListDaoImpl {
         return "";
     }
 
-    public static ObservableList<String> getAll() throws SQLException {
+    @Override
+    public List<ItemsDto> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM item";
         PreparedStatement lstm=con.prepareStatement(sql);
 
-        ObservableList<String> list = FXCollections.observableArrayList();
+        List<ItemsDto> list = new ArrayList<>(); //2
         ResultSet resultSet = lstm.executeQuery();
         while (resultSet.next()){
-            list.add(resultSet.getString(2));
+            list.add(new ItemsDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getInt(3),
+                    resultSet.getDouble(4),
+                    resultSet.getString(5)
+            ));
         }
         return list;
+    }
+
+    @Override
+    public ItemsDto get() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(ItemsDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(ItemsDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exists(ItemsDto itemsDto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String getId() throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     /*public static List<String> loadIds() throws SQLException {

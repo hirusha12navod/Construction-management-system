@@ -13,13 +13,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.db.DBconnection;
+import lk.ijse.construction.model.ItemsDto;
 import lk.ijse.construction.model.tm.SupplierTm;
-import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 import lk.ijse.construction.dao.custom.impl.SupplierDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class HardwareSupplierRegController {
 
@@ -42,6 +45,8 @@ public class HardwareSupplierRegController {
     public JFXComboBox cmbItemOnAction;
     public JFXButton btnSaveOnAction;
 
+    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+
     ObservableList<SupplierTm> tmList = FXCollections.observableArrayList();
     @FXML
     void initialize(){
@@ -55,8 +60,12 @@ public class HardwareSupplierRegController {
         btnUpdateOnAction.setDisable(true);
 
         try {
-            cmbItemOnAction.setItems(ItemListDaoImpl.getAll());
-        }catch (SQLException e){
+            ObservableList<String> list = FXCollections.observableArrayList();
+            for (ItemsDto dto:itemListDao.getAll()) {
+                list.add(dto.getItem_name());
+            }
+            cmbItemOnAction.setItems(list);
+        }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
         loadAllSuppliers();

@@ -13,8 +13,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
+import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.model.ItemLDto;
-import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -29,6 +29,7 @@ public class HardwareItemSearchController {
     public JFXButton back;
 
     HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
 
     @FXML
     public void initialize(){
@@ -44,7 +45,7 @@ public class HardwareItemSearchController {
             cmbCat.setOnAction(actionEvent -> {
                 try {
                     ObservableList<String> list = FXCollections.observableArrayList();
-                    List<ItemLDto> names = ItemListDaoImpl.getList(cmbCat.getValue().toString());
+                    List<ItemLDto> names = itemListDao.getList(cmbCat.getValue().toString());
 
                     for (ItemLDto idm : names) {
                         list.add(idm.getItem_name());
@@ -53,13 +54,13 @@ public class HardwareItemSearchController {
 
                     cmbItem.setOnAction(actionEvent1 -> {
                         try {
-                            lblPrice.setText(String.valueOf(ItemListDaoImpl.getPrice(cmbItem.getValue().toString())));
-                            lblRack.setText(String.valueOf(ItemListDaoImpl.getRack(cmbItem.getValue().toString())));
-                        } catch (SQLException throwables) {
+                            lblPrice.setText(String.valueOf(itemListDao.getPrice(cmbItem.getValue().toString())));
+                            lblRack.setText(String.valueOf(itemListDao.getRack(cmbItem.getValue().toString())));
+                        } catch (SQLException | ClassNotFoundException throwables) {
                             throwables.printStackTrace();
                         }
                     });
-                } catch (SQLException e) {
+                } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
                 }
