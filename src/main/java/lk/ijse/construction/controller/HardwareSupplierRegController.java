@@ -15,14 +15,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.ItemListDao;
+import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemsDto;
+import lk.ijse.construction.model.SupplierDto;
 import lk.ijse.construction.model.tm.SupplierTm;
-import lk.ijse.construction.dao.custom.impl.SupplierDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class HardwareSupplierRegController {
 
@@ -46,6 +46,7 @@ public class HardwareSupplierRegController {
     public JFXButton btnSaveOnAction;
 
     ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+    SupplierDao supplierDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
 
     ObservableList<SupplierTm> tmList = FXCollections.observableArrayList();
     @FXML
@@ -97,8 +98,16 @@ public class HardwareSupplierRegController {
 
     private void loadAllSuppliers() {
         try {
-            tmList = SupplierDaoImpl.getAll();
-        } catch (SQLException throwables) {
+
+            for (SupplierDto dto:supplierDao.getAll()) {
+                tmList.add(new SupplierTm(
+                        dto.getSupplier_id(),
+                        dto.getName(),
+                        dto.getContact(),
+                        dto.getItem()
+                ));
+            }
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
         tblSupplier.setItems(tmList);
@@ -150,7 +159,12 @@ public class HardwareSupplierRegController {
                     tm.setContact(Integer.parseInt(txtSupplierContact.getText()));
                     tm.setItem(cmbItemOnAction.getValue().toString());
 
-                    Boolean isUpdated = SupplierDaoImpl.update(tm);
+                    Boolean isUpdated = supplierDao.update(new SupplierDto(
+                            tm.getSupplier_id(),
+                            tm.getName(),
+                            tm.getContact(),
+                            tm.getItem()
+                    ));
                     if (isUpdated) {
                         tblSupplier.refresh();
                         new Alert(Alert.AlertType.INFORMATION, "updated..!").show();
@@ -159,7 +173,7 @@ public class HardwareSupplierRegController {
                     }
                 }
             }
-        }catch (SQLException e){
+        }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
     }
@@ -184,18 +198,17 @@ public class HardwareSupplierRegController {
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (txtSupplierContact.getText().matches("^[0-9]*$")) {
-        SupplierTm supplierTm = new SupplierTm(
-                lblSupplierId.getText(),
-                txtSupplierName.getText(),
-                Integer.parseInt(txtSupplierContact.getText()),
-                cmbItemOnAction.getValue().toString()
-        );
         try {
-            Boolean isSaved = SupplierDaoImpl.save(supplierTm);
+            Boolean isSaved = supplierDao.save(new SupplierDto(
+                    lblSupplierId.getText(),
+                    txtSupplierName.getText(),
+                    Integer.parseInt(txtSupplierContact.getText()),
+                    cmbItemOnAction.getValue().toString()
+            ));
             if (isSaved) {
                 clearFields();
             }
-        } catch (SQLException throwables) {
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
         } else {

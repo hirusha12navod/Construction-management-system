@@ -16,11 +16,11 @@ import javafx.stage.Stage;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.ItemListDao;
-import lk.ijse.construction.dao.custom.impl.SupplierNameDaoImpl;
+import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemLDto;
 import lk.ijse.construction.model.ItemsDto;
-import lk.ijse.construction.model.SupNameDto;
+import lk.ijse.construction.model.SupplierDto;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -43,6 +43,7 @@ public class HardwareItemUpdateController {
 
     HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
     ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+    SupplierDao supplierDao  = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
 
     @FXML
     void initialize() {
@@ -134,13 +135,13 @@ public class HardwareItemUpdateController {
         String sup=String.valueOf(cmbItem.getValue());
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<SupNameDto> ids = SupplierNameDaoImpl.getList(sup);
+            List<String> ids = supplierDao.getList(sup);
 
-            for (SupNameDto idm : ids) {
-                obList.add(idm.getSupplier_name());
+            for (String idm : ids) {
+                obList.add(idm);
             }
             cmbSupplier.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
