@@ -15,11 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
-import lk.ijse.construction.dao.custom.impl.ItemNameTakeDaoImpl;
+import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.dao.custom.impl.SupplierNameDaoImpl;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.model.ItemCallDto;
 import lk.ijse.construction.model.ItemLDto;
+import lk.ijse.construction.model.ItemsDto;
 import lk.ijse.construction.model.SupNameDto;
 
 import java.io.IOException;
@@ -42,6 +42,7 @@ public class HardwareItemUpdateController {
     public TextField txtQty;
 
     HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
 
     @FXML
     void initialize() {
@@ -78,13 +79,13 @@ public class HardwareItemUpdateController {
         String id=String.valueOf(cmbItemCategory.getValue().toString());
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<ItemLDto> ids = ItemNameTakeDaoImpl.getList(id);
+            List<ItemLDto> ids = itemListDao.getList(id);
 
             for (ItemLDto idm : ids) {
                 obList.add(idm.getItem_name());
             }
             cmbItem.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -122,10 +123,10 @@ public class HardwareItemUpdateController {
 
         try {
             if (cmbItem.getValue()!=null) {
-                ItemCallDto IC = ItemNameTakeDaoImpl.searchById(id);
+                ItemsDto IC = itemListDao.searchById(id);
                 lblItemId.setText(IC.getItem_Id());
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!"+e).show();
         }

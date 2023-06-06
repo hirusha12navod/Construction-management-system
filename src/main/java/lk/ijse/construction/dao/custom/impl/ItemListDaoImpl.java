@@ -136,6 +136,26 @@ public class ItemListDaoImpl implements ItemListDao {
     }
 
     @Override
+    public ItemsDto searchById(String id) throws SQLException, ClassNotFoundException {
+        Connection con = DBconnection.getInstance().getConnection();
+
+        PreparedStatement pstm = con.prepareStatement("SELECT item_Id FROM item WHERE item_name= ?");
+        pstm.setString(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            return  new ItemsDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getInt(3),
+                    resultSet.getDouble(4),
+                    resultSet.getString(5)
+            );
+        }
+        return new ItemsDto();
+    }
+
+    @Override
     public ItemsDto get() throws SQLException, ClassNotFoundException {
         return null;
     }
