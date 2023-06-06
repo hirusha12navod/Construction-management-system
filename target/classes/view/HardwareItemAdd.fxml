@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="addItemsPane" prefHeight="564.0" prefWidth="789.0" style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.HardwareItemAddController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="790.0" style="-fx-background-color: #273c75;">
+         <children>
+            <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADD ITEMS TO HARDWARE " wrappingWidth="311.7367248535156">
+               <font>
+                  <Font name="Agency FB" size="28.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="back" layoutX="724.0" layoutY="12.0" text="BACK" textFill="#edeaef">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="71.0" prefHeight="22.0" prefWidth="97.0" text="Category :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="114.0" prefHeight="22.0" prefWidth="28.0" text=" ID:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="166.0" prefHeight="22.0" prefWidth="97.0" text="Item :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="216.0" prefHeight="22.0" prefWidth="97.0" text="Price :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="271.0" prefHeight="22.0" prefWidth="97.0" text="Rack No :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="322.0" prefHeight="22.0" prefWidth="97.0" text="Stock :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnSaveOnAction" layoutX="519.0" layoutY="471.0" onAction="#btnSaveOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="SAVE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnClearOnAction" layoutX="624.0" layoutY="471.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="CLEAR" textFill="#e84118">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="261.0" fitWidth="335.0" layoutX="480.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\pngegg.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblItemsId" layoutX="168.0" layoutY="114.0" prefHeight="22.0" prefWidth="97.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtItemName" layoutX="168.0" layoutY="164.0" prefHeight="26.0" prefWidth="312.0" />
+      <TextField fx:id="txtItemPrice" layoutX="168.0" layoutY="214.0" prefHeight="26.0" prefWidth="182.0" />
+      <TextField fx:id="txtRackNo" layoutX="167.0" layoutY="269.0" prefHeight="26.0" prefWidth="86.0" />
+      <TextField fx:id="txtItemStock" layoutX="167.0" layoutY="320.0" prefHeight="26.0" prefWidth="86.0" />
+      <ImageView fitHeight="151.0" fitWidth="219.0" layoutX="124.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\building.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="cmbItemCategory" layoutX="167.0" layoutY="70.0" prefHeight="26.0" prefWidth="312.0" />
+   </children>
+</AnchorPane>

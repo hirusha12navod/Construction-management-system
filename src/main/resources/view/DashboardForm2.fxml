@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="dashboardPane" prefHeight="698.0" prefWidth="890.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.DashboardForm2Controller">
+   <left>
+      <AnchorPane fx:id="slider" prefHeight="575.0" prefWidth="245.0" style="-fx-background-color: #192a56;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="menuPane" layoutX="28.0" layoutY="44.0" prefHeight="503.0" prefWidth="246.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+               <children>
+                  <JFXButton fx:id="btnHardwareManagement" alignment="BASELINE_LEFT" prefHeight="38.0" prefWidth="176.0" stylesheets="@../styles/styles.css" text="HARDWARE MANAGE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="D:\Example\src\main\resources\Image\supermarketnew.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnConstructionManage" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="38.0" prefWidth="176.0" stylesheets="@../styles/styles.css" text="CONSTRUCTION MANAGE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="D:\Example\src\main\resources\Image\hooknew.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnEmployeeManage" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="48.0" prefHeight="38.0" prefWidth="176.0" stylesheets="@../styles/styles.css" text="EMPLOYEE MANAGE" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="D:\Example\src\main\resources\Image\employees.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCalculateManage" alignment="BASELINE_LEFT" layoutX="10.0" layoutY="87.0" prefHeight="38.0" prefWidth="176.0" stylesheets="@../styles/styles.css" text="CALCULATER" textFill="#ffb8b8">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="D:\Example\src\main\resources\Image\calculator new.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <ImageView fx:id="btnLogout" fitHeight="42.0" fitWidth="55.0" layoutX="12.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="D:\Example\src\main\resources\Image\log-out.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <top>
+      <AnchorPane prefHeight="94.0" prefWidth="900.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="-19.0" layoutY="1.0" prefHeight="26.0" prefWidth="840.0" style="-fx-background-color: #192a56;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <JFXButton fx:id="btnMenu" layoutY="26.0" onAction="#btnMenuOnAction" prefHeight="68.0" prefWidth="246.0" stylesheets="@../styles/Menu.css" text="MENU" textFill="#7b5b5b">
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="D:\Example\src\main\resources\Image\menu-button-of-three-horizontal-lines.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Pane layoutX="245.0" layoutY="26.0" prefHeight="68.0" prefWidth="651.0" style="-fx-background-color: #f7f1e3;">
+               <children>
+                  <Text layoutX="219.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REAL ESTATE  &amp;  CONSTRUCTIONS" textOrigin="CENTER" wrappingWidth="374.1370391845703">
+                     <font>
+                        <Font name="Arial Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#1b0b0b" layoutX="221.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREATE , DESIGN &amp; BUILD " wrappingWidth="156.5367431640625">
+                     <font>
+                        <Font name="Arial Narrow" size="11.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="46.0" layoutY="3.0" strokeType="OUTSIDE" strokeWidth="0.0" text="EPIC EYE " textOrigin="TOP" wrappingWidth="186.13674542307854">
+                     <font>
+                        <Font size="44.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="566.0" prefWidth="575.0" style="-fx-background-image: D:\Example\src\main\resources\Image\Construction .png;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="604.0" fitWidth="657.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="D:\Example\src\main\resources\Image\r-architecture-rOk4VSMS3Ck-unsplash.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane fx:id="hardwarePane" layoutX="193.0" layoutY="14.0" opacity="0.74" prefHeight="547.0" prefWidth="218.0">
+               <children>
+                  <JFXButton fx:id="btnCustReg" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="8.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="CUSTOMER REGISTRATION" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnItemAdd" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="72.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="ADD ITEM" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnItemCat" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="136.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="ITEM CATEGORY" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnItemList" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="200.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="ITEM LIST" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnItemSearch" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="265.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="SEARCH ITEM" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnItemUpdate" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="328.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="UPDATE ITEM" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSalesBill" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="390.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="SALES BILL" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSupplierReg" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="453.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #82ccdd;" text="SUPPLIER REGISTRATION" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="constructionPane" layoutX="194.0" layoutY="14.0" opacity="0.74" prefHeight="322.0" prefWidth="242.0">
+               <children>
+                  <JFXButton fx:id="btnAddMaterial" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="14.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #82ccdd;" text="ADD MATERIALS" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnMaterialList" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="82.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #82ccdd;" text="MATERIAL LIST" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSiteEnd" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="212.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #82ccdd;" text="SITE END" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSiteRegistration" alignment="CENTER" contentDisplay="CENTER" layoutX="6.0" layoutY="150.0" prefHeight="38.0" prefWidth="206.0" style="-fx-background-color: #82ccdd;" text="SITE REGISTRATION" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="CalculatePane" layoutX="193.0" layoutY="14.0" opacity="0.74" prefHeight="340.0" prefWidth="239.0">
+               <children>
+                  <JFXButton fx:id="btnCalculateFlow" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="25.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #82ccdd;" text="CALCULATE FLOW" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCalculateSlab" alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="95.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="CALCULATE SLAB" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCalculateTower" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="163.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="CALCULATE TOWER" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCalculateTiles" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="230.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #82ccdd;" text="CALCULATE TILES" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCalculateWall" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="293.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="CALCULATE WALL" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="employeePane" layoutX="194.0" layoutY="14.0" opacity="0.74" prefHeight="87.0" prefWidth="269.0">
+               <children>
+                  <JFXButton fx:id="btnEmployeeReg" alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="14.0" prefHeight="38.0" prefWidth="208.0" style="-fx-background-color: #82ccdd;" text="EMPLOYEE REGISTRATION" textFill="#432323">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

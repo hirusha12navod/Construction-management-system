@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="mainPane" prefHeight="692.0" prefWidth="790.0" style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.HardwareSalesBillController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="790.0" style="-fx-background-color: #273c75;">
+         <children>
+            <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CALCULATE BILL" wrappingWidth="311.7367248535156">
+               <font>
+                  <Font name="Agency FB" size="28.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="back" layoutX="724.0" layoutY="12.0" text="BACK" textFill="#edeaef">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label layoutX="20.0" layoutY="71.0" prefHeight="22.0" prefWidth="97.0" text="Bill No :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="114.0" prefHeight="22.0" prefWidth="98.0" text=" Customer:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="500.0" prefHeight="22.0" prefWidth="97.0" text="No Of Items :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnBill" layoutX="168.0" layoutY="634.0" onAction="#btnBillOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="BILL">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnClear" layoutX="29.0" layoutY="634.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="CLEAR" textFill="#e84118">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lblBillNo" layoutX="168.0" layoutY="71.0" prefHeight="22.0" prefWidth="97.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbBillCustomer" layoutX="168.0" layoutY="112.0" prefHeight="26.0" prefWidth="403.0" />
+      <BorderPane layoutX="20.0" layoutY="167.0" prefHeight="75.0" prefWidth="751.0" />
+      <Pane layoutX="18.0" layoutY="155.0" prefHeight="63.0" prefWidth="751.0" style="-fx-background-color: #c7ecee;">
+         <children>
+            <JFXComboBox fx:id="cmbItemCategory" layoutX="51.0" layoutY="19.0" onAction="#cmbItemCategoryOnAction" prefHeight="26.0" prefWidth="116.0" promptText="Category" />
+            <JFXComboBox fx:id="cmbItem" layoutX="218.0" layoutY="19.0" onAction="#cmbItemOnAction" prefHeight="26.0" prefWidth="98.0" />
+            <TextField fx:id="txtPrice" layoutX="364.0" layoutY="19.0" prefHeight="26.0" prefWidth="86.0" />
+            <TextField fx:id="txtQty" layoutX="494.0" layoutY="19.0" prefHeight="26.0" prefWidth="86.0" />
+            <JFXButton fx:id="btnAdd" layoutX="658.0" layoutY="19.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="ADD">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label fx:id="lblNoOfItems" layoutX="173.0" layoutY="500.0" prefHeight="22.0" prefWidth="97.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="551.0" prefHeight="22.0" prefWidth="97.0" text="Total Price :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="175.0" fitWidth="208.0" layoutX="525.0" layoutY="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\budget.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblBill" layoutX="21.0" layoutY="235.0" prefHeight="255.0" prefWidth="751.0">
+        <columns>
+            <TableColumn fx:id="colItemName" prefWidth="439.9999809265137" text="Item Name" />
+            <TableColumn fx:id="colQty" prefWidth="119.20001220703125" text="Quentity" />
+            <TableColumn fx:id="colPrice" prefWidth="192.00006103515625" text="Price" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblTotalPrice" layoutX="173.0" layoutY="551.0" prefHeight="22.0" prefWidth="97.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

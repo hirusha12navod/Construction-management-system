@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="searchItemspane" prefHeight="483.0" prefWidth="616.0" style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.HardwareItemSearchController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="618.0" style="-fx-background-color: #273c75;">
+         <children>
+            <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEARCH HARDWARE ITEMS" wrappingWidth="311.7367248535156">
+               <font>
+                  <Font name="Agency FB" size="28.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="back" layoutX="552.0" layoutY="12.0" text="BACK" textFill="#edeaef">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="71.0" prefHeight="22.0" prefWidth="97.0" text="Category :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPrice" layoutX="162.0" layoutY="166.0" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbCat" layoutX="162.0" layoutY="69.0" prefHeight="26.0" prefWidth="402.0" />
+      <Label layoutX="14.0" layoutY="117.0" prefHeight="22.0" prefWidth="97.0" text="Item :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="166.0" prefHeight="22.0" prefWidth="97.0" text="Price :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="219.0" prefHeight="22.0" prefWidth="97.0" text="Rack No :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="210.0" fitWidth="217.0" layoutX="363.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\search.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="cmbItem" layoutX="162.0" layoutY="115.0" prefHeight="26.0" prefWidth="182.0" />
+      <Label fx:id="lblRack" layoutX="162.0" layoutY="219.0" prefHeight="22.0" prefWidth="109.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

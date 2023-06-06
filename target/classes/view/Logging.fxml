@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="LoggingPane" prefHeight="504.0" prefWidth="760.0" style="-fx-background-color: #dff9fb;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.LoggingController">
+   <children>
+      <ImageView fitHeight="537.0" fitWidth="362.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\construction-silhouette.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblUn" layoutX="418.0" layoutY="197.0" prefHeight="22.0" prefWidth="97.0" text="User Name :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPw" layoutX="425.0" layoutY="234.0" prefHeight="22.0" prefWidth="97.0" text="Password :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBis" layoutX="474.0" layoutY="90.0" prefHeight="42.0" prefWidth="162.0" text="USER LOGIN" textFill="#badc58fc">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUserName" layoutX="565.0" layoutY="195.0" prefHeight="26.0" prefWidth="162.0" />
+      <TextField fx:id="txtPassword" layoutX="565.0" layoutY="232.0" prefHeight="26.0" prefWidth="162.0" />
+      <JFXButton fx:id="btnCClear" layoutX="627.0" layoutY="403.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="CANCEL" textFill="#e84118">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnLogging1" layoutX="498.0" layoutY="403.0" onAction="#btnLogging1OnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="SIGN IN">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnLogging" layoutX="381.0" layoutY="402.0" onAction="#btnLoggingOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="LOGGIN">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <Pane fx:id="RegisterPane" layoutX="362.0" prefHeight="527.0" prefWidth="418.0">
+         <children>
+            <Label layoutX="78.0" layoutY="85.0" prefHeight="42.0" prefWidth="260.0" text="USER REGISTRATION" textFill="#badc58fc">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="23.0" />
+               </font>
+            </Label>
+            <Label layoutX="22.0" layoutY="173.0" prefHeight="22.0" prefWidth="97.0" text="User Name :">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNewUserName" layoutX="199.0" layoutY="171.0" prefHeight="26.0" prefWidth="162.0" />
+            <Label layoutX="22.0" layoutY="221.0" prefHeight="22.0" prefWidth="97.0" text="Password :">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtNewPassword" layoutX="199.0" layoutY="219.0" prefHeight="26.0" prefWidth="162.0" />
+            <Label layoutX="22.0" layoutY="272.0" prefHeight="22.0" prefWidth="148.0" text="Re-Enter Password:">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtReEnterPassword" layoutX="199.0" layoutY="270.0" prefHeight="26.0" prefWidth="162.0" />
+            <JFXButton fx:id="btnRegister" layoutX="39.0" layoutY="400.0" onAction="#btnRegOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="REGISTER">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnCClear1" layoutX="240.0" layoutY="400.0" onAction="#btnClear1OnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="CANCEL" textFill="#e84118">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane fx:id="ConfirmPane" layoutY="2.0" prefHeight="527.0" prefWidth="742.0">
+         <children>
+            <Label layoutX="438.0" layoutY="90.0" prefHeight="42.0" prefWidth="260.0" text="USER REGISTRATION" textFill="#badc58fc">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="23.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnCClear11" layoutX="649.0" layoutY="387.0" onAction="#btnClear1OnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="CANCEL" textFill="#e84118">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <Label layoutX="387.0" layoutY="154.0" prefHeight="22.0" prefWidth="162.0" text="Enter Old User Name :">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtOldUserName1" layoutX="568.0" layoutY="152.0" prefHeight="26.0" prefWidth="162.0" />
+            <Label layoutX="387.0" layoutY="206.0" prefHeight="22.0" prefWidth="140.0" text="Enter Old Pssword :">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtOldPassword1" layoutX="568.0" layoutY="204.0" prefHeight="26.0" prefWidth="162.0" />
+            <JFXButton fx:id="btnOkOnAction1" layoutX="698.0" layoutY="228.0" onAction="#btnOkOnAction" text="OK">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="itemListPane" prefHeight="567.0" prefWidth="790.0" style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.HardwareItemListController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="790.0" style="-fx-background-color: #273c75;">
+         <children>
+            <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HARDWARE ITEM LIST" wrappingWidth="311.7367248535156">
+               <font>
+                  <Font name="Agency FB" size="28.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="back" layoutX="724.0" layoutY="12.0" text="BACK" textFill="#edeaef">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="71.0" prefHeight="22.0" prefWidth="97.0" text="Category :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbICategory" layoutX="162.0" layoutY="69.0" onAction="#cmbICategoryOnAction" prefHeight="26.0" prefWidth="402.0" />
+      <ImageView fitHeight="128.0" fitWidth="176.0" layoutX="617.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\list.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblItems" layoutX="14.0" layoutY="210.0" prefHeight="342.0" prefWidth="758.0">
+        <columns>
+          <TableColumn fx:id="colIID" prefWidth="83.99999713897705" text="Item ID" />
+          <TableColumn fx:id="colIName" prefWidth="358.40000915527344" text="Item Name" />
+            <TableColumn fx:id="colInitialStock" prefWidth="87.20001220703125" text="Initial Stock" />
+            <TableColumn fx:id="calPrice" prefWidth="113.60003662109375" text="Price" />
+            <TableColumn fx:id="colRackNo" prefWidth="115.20001220703125" text="Rack No" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="towerPane" prefHeight="404.0" prefWidth="790.0" style="-fx-background-color: #95afc0;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.CalculateTowerController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="790.0" style="-fx-background-color: #22a6b3;">
+         <children>
+            <Text fill="#dff9fb" layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CALCULATE FOR TOWER" wrappingWidth="311.7367248535156">
+               <font>
+                  <Font name="Agency FB" size="28.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="back" layoutX="732.0" layoutY="12.0" text="BACK" textFill="#edeaef">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Label layoutX="14.0" layoutY="71.0" prefHeight="22.0" prefWidth="97.0" text="Enter Height :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="114.0" prefHeight="22.0" prefWidth="98.0" text=" Enter Long:">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="155.0" prefHeight="22.0" prefWidth="97.0" text="Enter Width :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="247.0" prefHeight="22.0" prefWidth="97.0" text="Sand Pan :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="310.0" prefHeight="22.0" prefWidth="182.0" text="Concreate Stones Pan :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="368.0" prefHeight="22.0" prefWidth="97.0" text="Cement Pan :">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnCalculateOnAction" layoutX="489.0" layoutY="125.0" onAction="#btnCalculateOnAction" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #dcdde1;" text="CALCULATE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnClearOnAction" layoutX="643.0" layoutY="123.0" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-background-color: #dcdde1;" text="CLEAR" textFill="#e84118">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="146.0" fitWidth="155.0" layoutX="550.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="D:\Example\src\main\resources\Image\calculator Calc.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTowerSandPan" layoutX="212.0" layoutY="247.0" prefHeight="22.0" prefWidth="182.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtTowerLong" layoutX="212.0" layoutY="112.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Inches" />
+      <JFXTextField fx:id="txtTowerHeight" layoutX="212.0" layoutY="69.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Feet" />
+      <JFXTextField fx:id="txtTowerWidth" layoutX="212.0" layoutY="153.0" prefHeight="26.0" prefWidth="182.0" promptText="Enter Inches" />
+      <Label fx:id="lblTowerStonePan" layoutX="212.0" layoutY="310.0" prefHeight="22.0" prefWidth="182.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTowerCementPan" layoutX="212.0" layoutY="368.0" prefHeight="22.0" prefWidth="182.0" style="-fx-background-color: #c7ecee;">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

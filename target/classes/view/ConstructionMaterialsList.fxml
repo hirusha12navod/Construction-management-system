@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="materialsListPane" prefHeight="442.0" prefWidth="790.0" style="-fx-background-color: #f5f6fa;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.construction.controller.ConstructionMaterialsListController">
+   <children>
+      <Pane prefHeight="50.0" prefWidth="790.0" style="-fx-background-color: #f39c12;">
+         <children>
+            <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONSTRUCTION MATERIALS LIST" wrappingWidth="311.7367248535156">
+               <font>
+                  <Font name="Agency FB" size="28.0" />
+               </font>
+            </Text>
+            <JFXButton fx:id="back" layoutX="724.0" layoutY="12.0" text="BACK" textFill="#edeaef">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <TableView fx:id="tblMaterial" layoutX="12.0" layoutY="66.0" prefHeight="369.0" prefWidth="767.0">
+        <columns>
+          <TableColumn fx:id="clmMaterialName" prefWidth="604.0000123977661" text="MATERIAL NAME" />
+          <TableColumn fx:id="clmMaterilStock" prefWidth="163.20004272460938" text="STOCK" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
