@@ -11,8 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.model.ItemLDto;
-import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
 import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 
 import java.io.IOException;
@@ -27,11 +28,13 @@ public class HardwareItemSearchController {
     public AnchorPane searchItemspane;
     public JFXButton back;
 
+    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+
     @FXML
     public void initialize(){
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddDaoImpl.loadIds();
+            List<String> ids = hardwareItemAddDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -61,7 +64,7 @@ public class HardwareItemSearchController {
                     new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
                 }
             });
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

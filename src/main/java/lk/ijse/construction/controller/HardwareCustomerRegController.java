@@ -14,9 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.HardwareCustomerDto;
-import lk.ijse.construction.dao.custom.impl.HardwareCustomerDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
@@ -41,6 +42,8 @@ public class HardwareCustomerRegController {
     public JFXButton btnSearchOnAction;
     public JFXComboBox cmbCId;
 
+    HardwareCustomerDao hardwareCustomerDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
+
     @FXML
     void initialize() {
         idGen();
@@ -61,13 +64,13 @@ public class HardwareCustomerRegController {
     private void loadCustomerIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareCustomerDaoImpl.loadIds();
+            List<String> ids = hardwareCustomerDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbCId.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -78,12 +81,12 @@ public class HardwareCustomerRegController {
         String id=String.valueOf(cmbCId.getValue());
 
         try {
-            HardwareCustomerDto customer = HardwareCustomerDaoImpl.searchById(id);
+            HardwareCustomerDto customer = hardwareCustomerDao.searchById(id);
             txtCName.setText(customer.getName());
             lblCustomerId.setText(customer.getCustomer_Id());
             txtConNo.setText(customer.getContact());
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

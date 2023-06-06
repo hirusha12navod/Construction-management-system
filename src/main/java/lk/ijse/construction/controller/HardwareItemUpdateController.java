@@ -13,7 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.impl.ItemNameTakeDaoImpl;
 import lk.ijse.construction.dao.custom.impl.SupplierNameDaoImpl;
 import lk.ijse.construction.db.DBconnection;
@@ -40,6 +41,8 @@ public class HardwareItemUpdateController {
     public Label lblDate;
     public TextField txtQty;
 
+    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+
     @FXML
     void initialize() {
         back.setOnMouseClicked(mouseEvent -> {
@@ -60,13 +63,13 @@ public class HardwareItemUpdateController {
     private void loadCatIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddDaoImpl.loadIds();
+            List<String> ids = hardwareItemAddDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbItemCategory.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

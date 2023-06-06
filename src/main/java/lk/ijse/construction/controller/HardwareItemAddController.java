@@ -15,8 +15,9 @@ import javafx.scene.control.TextField;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
 
 import java.awt.*;
 import java.io.IOException;
@@ -42,6 +43,8 @@ public class HardwareItemAddController extends Component {
     public JFXComboBox cmbItemCategory;
     public JFXButton btnBackOnAction;
 
+    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+
     @FXML
     private AnchorPane root;
 
@@ -53,13 +56,13 @@ public class HardwareItemAddController extends Component {
     private void loadItemCatogories() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddDaoImpl.loadIds();
+            List<String> ids = hardwareItemAddDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbItemCategory.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

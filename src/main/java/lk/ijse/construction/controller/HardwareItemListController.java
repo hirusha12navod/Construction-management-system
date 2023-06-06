@@ -14,9 +14,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.model.tm.ItemTM;
 import lk.ijse.construction.model.ItemsDto;
-import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
 import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 
 import java.io.IOException;
@@ -38,16 +39,18 @@ public class HardwareItemListController {
     public TableColumn colInitialStock;
     public TableColumn calPrice;
 
+    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+
     private void loadItemCatogories() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddDaoImpl.loadIds();
+            List<String> ids = hardwareItemAddDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbICategory.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

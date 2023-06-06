@@ -14,8 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.BillDao;
-import lk.ijse.construction.dao.custom.impl.HardwareCustomerDaoImpl;
-import lk.ijse.construction.dao.custom.impl.HardwareItemAddDaoImpl;
+import lk.ijse.construction.dao.custom.HardwareCustomerDao;
+import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.impl.ItemListDaoImpl;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.*;
@@ -54,7 +54,8 @@ public class HardwareSalesBillController {
     String SerialId="";
 
     BillDao billDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.BILL_DAO);
-
+    HardwareCustomerDao hardwareCustomerDao =DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
+    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
 
     @FXML
     void initialize(){
@@ -80,13 +81,13 @@ public class HardwareSalesBillController {
 
     private void loadCusIds() {
         try {
-            List<String> ids = HardwareCustomerDaoImpl.loadIds();
+            List<String> ids = hardwareCustomerDao.loadIds();
             ObservableList<String> names = FXCollections.observableArrayList();
             for (String id : ids) {
-                names.add(HardwareCustomerDaoImpl.getName(id));
+                names.add(hardwareCustomerDao.getName(id));
             }
             cmbBillCustomer.setItems(names);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -114,13 +115,13 @@ public class HardwareSalesBillController {
     private void loadCatIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = HardwareItemAddDaoImpl.loadIds();
+            List<String> ids = hardwareItemAddDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbItemCategory.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
