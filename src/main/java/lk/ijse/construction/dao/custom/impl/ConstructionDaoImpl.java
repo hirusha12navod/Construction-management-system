@@ -2,16 +2,20 @@ package lk.ijse.construction.dao.custom.impl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lk.ijse.construction.dao.custom.ConstructionDao;
 import lk.ijse.construction.db.DBconnection;
+import lk.ijse.construction.model.MaterialDto;
 import lk.ijse.construction.model.tm.MaterialTm;
 
 import java.sql.*;
+import java.util.List;
 
-public class ConstructionDaoImpl {
+public class ConstructionDaoImpl implements ConstructionDao {
 
     String SerialId = "";
 
-    public static double getStock(String material) throws SQLException {
+    @Override
+    public double getStock(String material) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT stock FROM constructionst WHERE material_name = ?");
@@ -23,7 +27,8 @@ public class ConstructionDaoImpl {
         return 0;
     }
 
-    public static void updateStock(double stock,String name) throws SQLException {
+    @Override
+    public void updateStock(double stock,String name) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("UPDATE constructionst SET stock=? WHERE material_name=?");
@@ -32,18 +37,49 @@ public class ConstructionDaoImpl {
         pstm.executeUpdate();
     }
 
-    public static ObservableList<MaterialTm> getAll() throws SQLException {
+    @Override
+    public List<MaterialDto> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT * FROM constructionst");
-        ObservableList<MaterialTm> list = FXCollections.observableArrayList();
+        ObservableList<MaterialDto> list = FXCollections.observableArrayList();
         ResultSet resultSet = pstm.executeQuery();
         while (resultSet.next()){
-            list.add(new MaterialTm(
+            list.add(new MaterialDto(
                     resultSet.getString(1),
                     resultSet.getDouble(2)
             ));
         }
         return list;
+    }
+
+    @Override
+    public MaterialDto get() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(MaterialDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(MaterialDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exists(MaterialDto materialDto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String getId() throws SQLException, ClassNotFoundException {
+        return null;
     }
 }

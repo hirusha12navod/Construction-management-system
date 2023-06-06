@@ -1,4 +1,5 @@
 package lk.ijse.construction.controller;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -12,9 +13,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.EmployeeRegistrationDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.EmployeeDto;
-import lk.ijse.construction.dao.custom.impl.EmployeeRegistrationDaoImpl;
 
 import java.io.IOException;
 import java.sql.*;
@@ -45,6 +47,7 @@ public class EmployeeRegistrationController{
     public JFXComboBox cmbEmployeeId;
     public JFXButton btnSave;
 
+    EmployeeRegistrationDao employeeRegistrationDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.EMPLOYEE_REGISTRATION_DAO);
 
     @FXML
     void initialize(){
@@ -69,13 +72,13 @@ public class EmployeeRegistrationController{
     private void loadEmpIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = EmployeeRegistrationDaoImpl.loadIds();
+            List<String> ids = employeeRegistrationDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbEmployeeId.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -86,13 +89,13 @@ public class EmployeeRegistrationController{
         String id=String.valueOf(cmbEmployeeId.getValue());
 
         try {
-            EmployeeDto employee = EmployeeRegistrationDaoImpl.searchById(id);
+            EmployeeDto employee = employeeRegistrationDao.searchById(id);
             txtfname.setText(employee.getEmpName());
             txtdesignation.setText(employee.getDesignation());
             txtcontactno.setText(employee.getContact_no());
             txtnic.setText(employee.getNic());
             txtlane.setText(employee.getEAddress());
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

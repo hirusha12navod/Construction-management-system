@@ -1,5 +1,6 @@
 package lk.ijse.construction.dao.custom.impl;
 
+import lk.ijse.construction.dao.custom.EndSiteDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.EndSiteDto;
 
@@ -7,12 +8,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EndSiteDaoImpl {
+public class EndSiteDaoImpl implements EndSiteDao {
     String SerialId = "";
 
 
-
-    public static List<EndSiteDto> getAll() throws SQLException {
+    @Override
+    public List<EndSiteDto> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT site_name,start_date FROM site";
 
@@ -28,7 +29,37 @@ public class EndSiteDaoImpl {
         return data;
     }
 
-    public static List<String> loadIds() throws SQLException {
+    @Override
+    public EndSiteDto get() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public boolean save(EndSiteDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(EndSiteDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean exists(EndSiteDto endSiteDto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public String getId() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+    @Override
+    public List<String> loadIds() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         ResultSet resultSet = con.createStatement().executeQuery("SELECT * FROM site");
 
@@ -39,8 +70,8 @@ public class EndSiteDaoImpl {
         }
         return data;
     }
-
-    public static EndSiteDto searchById(String id) throws SQLException {
+    @Override
+    public EndSiteDto searchById(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT site_name,start_date FROM site WHERE site_name = ?");

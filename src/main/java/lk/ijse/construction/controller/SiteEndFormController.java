@@ -13,9 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.EndSiteDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.EndSiteDto;
-import lk.ijse.construction.dao.custom.impl.EndSiteDaoImpl;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -38,6 +39,8 @@ public class SiteEndFormController {
     public Button btnSiteCalculateOnAction;
     public JFXComboBox cmbSiteName;
 
+    EndSiteDao endSiteDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.END_SITE_DAO);
+
 
 
     @FXML
@@ -55,13 +58,13 @@ public class SiteEndFormController {
 
         try{
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = EndSiteDaoImpl.loadIds();
+            List<String> ids = endSiteDao.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
             }
             cmbSiteName.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -117,13 +120,13 @@ public class SiteEndFormController {
         String id=String.valueOf(cmbSiteName.getValue());
 
         try {
-            EndSiteDto Esite = EndSiteDaoImpl.searchById(id);
+            EndSiteDto Esite = endSiteDao.searchById(id);
             if (Esite!=null) {
                 lblSiteStartDate.setText(Esite.getStart_date());
             }
 
 
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

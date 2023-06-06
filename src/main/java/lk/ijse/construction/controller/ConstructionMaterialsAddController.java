@@ -12,7 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.custom.impl.ConstructionDaoImpl;
+import lk.ijse.construction.dao.DaoFactory;
+import lk.ijse.construction.dao.custom.ConstructionDao;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,6 +27,8 @@ public class ConstructionMaterialsAddController {
     public JFXButton back;
     public AnchorPane materialsAddPane;
     String SerialId="";
+
+    ConstructionDao constructionDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.CONSTRUCTION_DAO);
 
     @FXML
     public void initialize(){
@@ -49,8 +52,8 @@ public class ConstructionMaterialsAddController {
 
         cmbMaterial.setOnAction(actionEvent -> {
             try {
-                lblStock.setText(String.valueOf(ConstructionDaoImpl.getStock(cmbMaterial.getValue().toString())));
-            } catch (SQLException throwables) {
+                lblStock.setText(String.valueOf(constructionDao.getStock(cmbMaterial.getValue().toString())));
+            } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
             }
         });
@@ -68,9 +71,9 @@ public class ConstructionMaterialsAddController {
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (!txtQty.getText().isEmpty() && !cmbMaterial.getValue().toString().isEmpty()){
             try {
-                ConstructionDaoImpl.updateStock(Double.parseDouble(lblStock.getText()) + Double.parseDouble(txtQty.getText()),cmbMaterial.getValue().toString());
-                lblStock.setText(String.valueOf(ConstructionDaoImpl.getStock(cmbMaterial.getValue().toString())));
-            }catch (SQLException e){
+                constructionDao.updateStock(Double.parseDouble(lblStock.getText()) + Double.parseDouble(txtQty.getText()),cmbMaterial.getValue().toString());
+                lblStock.setText(String.valueOf(constructionDao.getStock(cmbMaterial.getValue().toString())));
+            }catch (SQLException | ClassNotFoundException e){
                 e.printStackTrace();
             }
         }
