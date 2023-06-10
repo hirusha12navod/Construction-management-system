@@ -1,6 +1,5 @@
 package lk.ijse.construction.dao;
 
-import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.dao.custom.impl.*;
 
 public class DaoFactory {

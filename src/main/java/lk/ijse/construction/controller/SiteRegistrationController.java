@@ -13,8 +13,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.SiteDao;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.SiteBo;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.SiteDto;
 
@@ -47,7 +47,8 @@ public class SiteRegistrationController {
     String SerialId="";
 
 
-    SiteDao siteDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SITE_DAO);
+//    SiteDao siteDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SITE_DAO);
+    SiteBo siteBo = BoFactory.getInstance().getBo(BoFactory.BoType.SITE_BO);
 
     @FXML
     void initialize() {
@@ -182,7 +183,7 @@ public class SiteRegistrationController {
     public void loadSiteIds(){
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = siteDao.loadIds();
+            List<String> ids = siteBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -198,7 +199,7 @@ public class SiteRegistrationController {
         String id=String.valueOf(cmbSearchId.getValue());
 
         try {
-            SiteDto site = siteDao.searchById(id);
+            SiteDto site = siteBo.searchById(id);
             txtSiteName.setText(site.getSite_name());
             txtLane.setText(site.getLocation());
             txtConact.setText(site.getContact_person());
