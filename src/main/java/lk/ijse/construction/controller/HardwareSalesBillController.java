@@ -16,8 +16,7 @@ import lk.ijse.construction.bo.custom.BillBo;
 import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.HardwareCustomerBo;
 import lk.ijse.construction.bo.custom.HardwareItemAddBo;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ItemListDao;
+import lk.ijse.construction.bo.custom.ItemListBo;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.*;
 import lk.ijse.construction.model.tm.BillTm;
@@ -57,11 +56,12 @@ public class HardwareSalesBillController {
 //    BillDao billDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.BILL_DAO);
 //    HardwareCustomerDao hardwareCustomerDao =DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
 //    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
-    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+//    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
 
     BillBo billBo = BoFactory.getInstance().getBo(BoFactory.BoType.BILL_BO);
     HardwareCustomerBo hardwareCustomerBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_CUSTOMER_BO);
     HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
+    ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
 
     @FXML
     void initialize(){
@@ -165,7 +165,7 @@ public class HardwareSalesBillController {
             connection.setAutoCommit(false);
             Boolean alert = false;
             for (int i = 0; i < tmList.size(); i++) {
-                Boolean isUpdated = itemListDao.updateStock(itemListDao.getQty(tmList.get(i).getName()) - tmList.get(i).getQty(), tmList.get(i).getName());
+                Boolean isUpdated = itemListBo.updateStock(itemListBo.getQty(tmList.get(i).getName()) - tmList.get(i).getQty(), tmList.get(i).getName());
                 if (!isUpdated){
                     alert = true;
                 }
@@ -237,7 +237,7 @@ public class HardwareSalesBillController {
 
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<ItemLDto> ids = itemListDao.getList(id);
+            List<ItemLDto> ids = itemListBo.getList(id);
 
             for (ItemLDto idm : ids) {
                 obList.add(idm.getItem_name());
@@ -252,7 +252,7 @@ public class HardwareSalesBillController {
     public void cmbItemOnAction(ActionEvent actionEvent) {
         if (cmbItem.getValue()!=null) {
             try {
-                txtPrice.setText(String.valueOf(itemListDao.getPrice(cmbItem.getValue().toString() != null ? cmbItem.getValue().toString() : "")));
+                txtPrice.setText(String.valueOf(itemListBo.getPrice(cmbItem.getValue().toString() != null ? cmbItem.getValue().toString() : "")));
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
             }

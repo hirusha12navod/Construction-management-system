@@ -13,8 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.ItemListBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemsDto;
@@ -43,8 +44,10 @@ public class HardwareSupplierRegController {
     public JFXComboBox cmbItemOnAction;
     public JFXButton btnSaveOnAction;
 
-    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+//    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
     SupplierDao supplierDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
+
+    ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
 
     ObservableList<SupplierTm> tmList = FXCollections.observableArrayList();
     @FXML
@@ -60,7 +63,7 @@ public class HardwareSupplierRegController {
 
         try {
             ObservableList<String> list = FXCollections.observableArrayList();
-            for (ItemsDto dto:itemListDao.getAll()) {
+            for (ItemsDto dto:itemListBo.getAll()) {
                 list.add(dto.getItem_name());
             }
             cmbItemOnAction.setItems(list);

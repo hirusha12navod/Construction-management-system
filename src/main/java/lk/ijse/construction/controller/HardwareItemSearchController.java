@@ -13,8 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.HardwareItemAddBo;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ItemListDao;
+import lk.ijse.construction.bo.custom.ItemListBo;
 import lk.ijse.construction.model.ItemLDto;
 
 import java.io.IOException;
@@ -30,9 +29,10 @@ public class HardwareItemSearchController {
     public JFXButton back;
 
 //    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
-    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+//    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
 
     HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
+    ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
 
     @FXML
     public void initialize(){
@@ -48,7 +48,7 @@ public class HardwareItemSearchController {
             cmbCat.setOnAction(actionEvent -> {
                 try {
                     ObservableList<String> list = FXCollections.observableArrayList();
-                    List<ItemLDto> names = itemListDao.getList(cmbCat.getValue().toString());
+                    List<ItemLDto> names = itemListBo.getList(cmbCat.getValue().toString());
 
                     for (ItemLDto idm : names) {
                         list.add(idm.getItem_name());
@@ -57,8 +57,8 @@ public class HardwareItemSearchController {
 
                     cmbItem.setOnAction(actionEvent1 -> {
                         try {
-                            lblPrice.setText(String.valueOf(itemListDao.getPrice(cmbItem.getValue().toString())));
-                            lblRack.setText(String.valueOf(itemListDao.getRack(cmbItem.getValue().toString())));
+                            lblPrice.setText(String.valueOf(itemListBo.getPrice(cmbItem.getValue().toString())));
+                            lblRack.setText(String.valueOf(itemListBo.getRack(cmbItem.getValue().toString())));
                         } catch (SQLException | ClassNotFoundException throwables) {
                             throwables.printStackTrace();
                         }

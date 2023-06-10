@@ -15,8 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.HardwareItemAddBo;
+import lk.ijse.construction.bo.custom.ItemListBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemLDto;
@@ -42,10 +42,11 @@ public class HardwareItemUpdateController {
     public TextField txtQty;
 
 //    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
-    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+//    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
     SupplierDao supplierDao  = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
 
     HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
+    ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
 
     @FXML
     void initialize() {
@@ -82,7 +83,7 @@ public class HardwareItemUpdateController {
         String id=String.valueOf(cmbItemCategory.getValue().toString());
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<ItemLDto> ids = itemListDao.getList(id);
+            List<ItemLDto> ids = itemListBo.getList(id);
 
             for (ItemLDto idm : ids) {
                 obList.add(idm.getItem_name());
@@ -126,7 +127,7 @@ public class HardwareItemUpdateController {
 
         try {
             if (cmbItem.getValue()!=null) {
-                ItemsDto IC = itemListDao.searchById(id);
+                ItemsDto IC = itemListBo.searchById(id);
                 lblItemId.setText(IC.getItem_Id());
             }
         } catch (SQLException | ClassNotFoundException e) {

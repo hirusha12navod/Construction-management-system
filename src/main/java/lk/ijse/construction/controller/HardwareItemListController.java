@@ -16,8 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.HardwareItemAddBo;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.ItemListDao;
+import lk.ijse.construction.bo.custom.ItemListBo;
 import lk.ijse.construction.model.tm.ItemTM;
 import lk.ijse.construction.model.ItemsDto;
 
@@ -41,7 +40,8 @@ public class HardwareItemListController {
     public TableColumn calPrice;
 
 //    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
-    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+//    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+    ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
 
     HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
 
@@ -74,7 +74,7 @@ public class HardwareItemListController {
 
         try {
             ObservableList<ItemTM> obList = FXCollections.observableArrayList();
-            List<ItemsDto> IList = itemListDao.getAll(id);
+            List<ItemsDto> IList = itemListBo.getAll(id);
 
             for (ItemsDto itm : IList) {
                 obList.add(new ItemTM(

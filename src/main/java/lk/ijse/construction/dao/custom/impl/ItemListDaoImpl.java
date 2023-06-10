@@ -1,6 +1,7 @@
 package lk.ijse.construction.dao.custom.impl;
 import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.db.DBconnection;
+import lk.ijse.construction.entity.Item;
 import lk.ijse.construction.model.ItemLDto;
 import lk.ijse.construction.model.ItemsDto;
 
@@ -11,18 +12,19 @@ import java.util.List;
 public class ItemListDaoImpl implements ItemListDao {
 
     @Override
-    public List<ItemLDto> getList(String id) throws SQLException {
+    public List<Item> getList(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT item_name FROM item WHERE item_category=?";
         PreparedStatement lstm=con.prepareStatement(sql);
         lstm.setString(1,id);
 
-        List<ItemLDto> data = new ArrayList<>();
+        List<Item> data = new ArrayList<>();
 
         ResultSet resultSet = lstm.executeQuery();
         while (resultSet.next()) {
-            data.add(new ItemLDto(
-                    resultSet.getString(1)
+            data.add(new Item(
+                    "", resultSet.getString(1),
+                    "",0,0,""
             ));
         }
         return data;
@@ -41,22 +43,23 @@ public class ItemListDaoImpl implements ItemListDao {
     }
 
     @Override
-    public List<ItemsDto> getAll(String id) throws SQLException {
+    public List<Item> getAll(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT item_Id,item_name,initial_stock,price,rack_no FROM item WHERE item_category=?";
         PreparedStatement lstm=con.prepareStatement(sql);
         lstm.setString(1,id);
 
-        List<ItemsDto> data = new ArrayList<>();
+        List<Item> data = new ArrayList<>();
 
         ResultSet resultSet = lstm.executeQuery();
         while (resultSet.next()) {
-            data.add(new ItemsDto(
+            data.add(new Item(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getInt(3),
-                    resultSet.getDouble(4),
-                    resultSet.getString(5)
+                    resultSet.getString(3),
+                    resultSet.getInt(4),
+                    resultSet.getDouble(5),
+                    resultSet.getString(6)
                                 ));
         }
         return data;
@@ -116,17 +119,18 @@ public class ItemListDaoImpl implements ItemListDao {
     }
 
     @Override
-    public List<ItemsDto> getAll() throws SQLException {
+    public List<Item> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM item";
         PreparedStatement lstm=con.prepareStatement(sql);
 
-        List<ItemsDto> list = new ArrayList<>(); //2
+        List<Item> list = new ArrayList<>(); //2
         ResultSet resultSet = lstm.executeQuery();
         while (resultSet.next()){
-            list.add(new ItemsDto(
+            list.add(new Item(
                     resultSet.getString(1),
                     resultSet.getString(2),
+                    resultSet.getString(3),
                     resultSet.getInt(4),
                     resultSet.getDouble(5),
                     resultSet.getString(6)
@@ -136,7 +140,7 @@ public class ItemListDaoImpl implements ItemListDao {
     }
 
     @Override
-    public ItemsDto searchById(String id) throws SQLException, ClassNotFoundException {
+    public Item searchById(String id) throws SQLException, ClassNotFoundException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT item_Id FROM item WHERE item_name= ?");
@@ -144,34 +148,35 @@ public class ItemListDaoImpl implements ItemListDao {
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return  new ItemsDto(
+            return  new Item(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getInt(3),
-                    resultSet.getDouble(4),
-                    resultSet.getString(5)
+                    resultSet.getString(3),
+                    resultSet.getInt(4),
+                    resultSet.getDouble(5),
+                    resultSet.getString(6)
             );
         }
-        return new ItemsDto();
+        return new Item();
     }
 
     @Override
-    public ItemsDto get() throws SQLException, ClassNotFoundException {
+    public Item get() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(ItemsDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Item dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(ItemsDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Item dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean exists(ItemsDto itemsDto) throws SQLException, ClassNotFoundException {
+    public boolean exists(Item itemsDto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
