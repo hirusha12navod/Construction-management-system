@@ -85,6 +85,6 @@ public class EndSiteDaoImpl implements EndSiteDao {
                     resultSet.getString(2)
             );
         }
-        return null;
+        return new EndSite();
     }
 }

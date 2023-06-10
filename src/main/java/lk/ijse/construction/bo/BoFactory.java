@@ -21,6 +21,7 @@ public class BoFactory {
             case BILL_BO: return (T) new BillBoImpl();
             case CONSTRUCTION_BO: return (T) new ConstructionBoImpl();
             case EMPLOYEE_BO: return (T) new EmployeeBoImpl();
+            case END_SITE_BO: return (T) new EndSiteBoImpl();
             case HARDWARE_CUSTOMER_BO: return (T) new HardwareCustomerBoImpl();
             case HARDWARE_ITEM_ADD_BO: return (T) new HardwareItemAddBoImpl();
             case ITEM_LIST_BO: return (T) new ItemListBoImpl();

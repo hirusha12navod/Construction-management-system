@@ -45,7 +45,7 @@ public class ItemListDaoImpl implements ItemListDao {
     @Override
     public List<Item> getAll(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
-        String sql = "SELECT item_Id,item_name,initial_stock,price,rack_no FROM item WHERE item_category=?";
+        String sql = "SELECT * FROM item WHERE item_category=?";
         PreparedStatement lstm=con.prepareStatement(sql);
         lstm.setString(1,id);
 
@@ -143,7 +143,7 @@ public class ItemListDaoImpl implements ItemListDao {
     public Item searchById(String id) throws SQLException, ClassNotFoundException {
         Connection con = DBconnection.getInstance().getConnection();
 
-        PreparedStatement pstm = con.prepareStatement("SELECT item_Id FROM item WHERE item_name= ?");
+        PreparedStatement pstm = con.prepareStatement("SELECT * FROM item WHERE item_name= ?");
         pstm.setString(1, id);
 
         ResultSet resultSet = pstm.executeQuery();
