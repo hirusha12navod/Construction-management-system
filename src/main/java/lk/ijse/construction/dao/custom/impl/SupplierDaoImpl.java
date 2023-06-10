@@ -2,6 +2,7 @@ package lk.ijse.construction.dao.custom.impl;
 
 import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.db.DBconnection;
+import lk.ijse.construction.entity.Supplier;
 import lk.ijse.construction.model.SupplierDto;
 
 import java.sql.*;
@@ -12,16 +13,16 @@ public class SupplierDaoImpl implements SupplierDao {
 
 
     @Override
-    public List<SupplierDto> getAll() throws SQLException {
+    public List<Supplier> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM supplier";
         PreparedStatement lstm=con.prepareStatement(sql);
 
-        List<SupplierDto> data = new ArrayList<>();
+        List<Supplier> data = new ArrayList<>();
 
         ResultSet resultSet = lstm.executeQuery();
         while (resultSet.next()) {
-            data.add(new SupplierDto(
+            data.add(new Supplier(
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getInt(3),
@@ -32,37 +33,37 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public SupplierDto get() throws SQLException, ClassNotFoundException {
+    public Supplier get() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(SupplierDto dto) throws SQLException {
+    public boolean save(Supplier dto) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "INSERT INTO supplier VALUES(?,?,?,?) ";
         PreparedStatement lstm=con.prepareStatement(sql);
-        lstm.setString(1, dto.getSupplier_id());
-        lstm.setString(2, dto.getName());
+        lstm.setString(1, dto.getSupplier_Id());
+        lstm.setString(2, dto.getSupplier_name());
         lstm.setInt(3, dto.getContact());
-        lstm.setString(4, dto.getItem());
+        lstm.setString(4, dto.getSupplyItems());
 
         return lstm.executeUpdate()>0;
 
     }
 
     @Override
-    public boolean update(SupplierDto dto) throws SQLException {
+    public boolean update(Supplier dto) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "UPDATE supplier SET supplier_name = ?,contact=? WHERE supplier_Id=?";
         PreparedStatement lstm=con.prepareStatement(sql);
-        lstm.setString(1, dto.getName());
+        lstm.setString(1, dto.getSupplier_name());
         lstm.setInt(2, dto.getContact());
-        lstm.setString(3,dto.getSupplier_id());
+        lstm.setString(3,dto.getSupplier_Id());
         return lstm.executeUpdate()>0;
     }
 
     @Override
-    public boolean exists(SupplierDto supplierDto) throws SQLException, ClassNotFoundException {
+    public boolean exists(Supplier supplierDto) throws SQLException, ClassNotFoundException {
         return false;
     }
 

@@ -14,7 +14,7 @@ public class BoFactory {
     }
     public enum BoType{
         BILL_BO,CONSTRUCTION_BO,EMPLOYEE_BO,END_SITE_BO,HARDWARE_CUSTOMER_BO,HARDWARE_ITEM_ADD_BO,
-        ITEM_LIST_BO,SITE_BO
+        ITEM_LIST_BO,SITE_BO,SUPPLIER_BO
     }
     public <T extends SuperBo>T getBo(BoType type){
         switch (type){
@@ -25,6 +25,7 @@ public class BoFactory {
             case HARDWARE_ITEM_ADD_BO: return (T) new HardwareItemAddBoImpl();
             case ITEM_LIST_BO: return (T) new ItemListBoImpl();
             case SITE_BO: return (T) new SiteBoImpl();
+            case SUPPLIER_BO: return (T) new SupplierBoImpl();
             default: return null;
         }
     }

@@ -16,8 +16,7 @@ import javafx.stage.Stage;
 import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.HardwareItemAddBo;
 import lk.ijse.construction.bo.custom.ItemListBo;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.SupplierDao;
+import lk.ijse.construction.bo.custom.SupplierBo;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemLDto;
 import lk.ijse.construction.model.ItemsDto;
@@ -43,10 +42,11 @@ public class HardwareItemUpdateController {
 
 //    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
 //    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
-    SupplierDao supplierDao  = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
+//    SupplierDao supplierDao  = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
 
     HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
     ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
+    SupplierBo supplierBo = BoFactory.getInstance().getBo(BoFactory.BoType.SUPPLIER_BO);
 
     @FXML
     void initialize() {
@@ -138,7 +138,7 @@ public class HardwareItemUpdateController {
         String sup=String.valueOf(cmbItem.getValue());
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = supplierDao.getList(sup);
+            List<String> ids = supplierBo.getList(sup);
 
             for (String idm : ids) {
                 obList.add(idm);

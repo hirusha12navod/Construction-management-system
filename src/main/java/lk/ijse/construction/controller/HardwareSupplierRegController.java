@@ -15,8 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.ItemListBo;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.SupplierDao;
+import lk.ijse.construction.bo.custom.SupplierBo;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemsDto;
 import lk.ijse.construction.model.SupplierDto;
@@ -45,9 +44,10 @@ public class HardwareSupplierRegController {
     public JFXButton btnSaveOnAction;
 
 //    ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
-    SupplierDao supplierDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
+//    SupplierDao supplierDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
 
     ItemListBo itemListBo = BoFactory.getInstance().getBo(BoFactory.BoType.ITEM_LIST_BO);
+    SupplierBo supplierBo = BoFactory.getInstance().getBo(BoFactory.BoType.SUPPLIER_BO);
 
     ObservableList<SupplierTm> tmList = FXCollections.observableArrayList();
     @FXML
@@ -100,7 +100,7 @@ public class HardwareSupplierRegController {
     private void loadAllSuppliers() {
         try {
 
-            for (SupplierDto dto:supplierDao.getAll()) {
+            for (SupplierDto dto:supplierBo.getAll()) {
                 tmList.add(new SupplierTm(
                         dto.getSupplier_id(),
                         dto.getName(),
@@ -160,7 +160,7 @@ public class HardwareSupplierRegController {
                     tm.setContact(Integer.parseInt(txtSupplierContact.getText()));
                     tm.setItem(cmbItemOnAction.getValue().toString());
 
-                    Boolean isUpdated = supplierDao.update(new SupplierDto(
+                    Boolean isUpdated = supplierBo.update(new SupplierDto(
                             tm.getSupplier_id(),
                             tm.getName(),
                             tm.getContact(),
@@ -200,7 +200,7 @@ public class HardwareSupplierRegController {
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if (txtSupplierContact.getText().matches("^[0-9]*$")) {
         try {
-            Boolean isSaved = supplierDao.save(new SupplierDto(
+            Boolean isSaved = supplierBo.save(new SupplierDto(
                     lblSupplierId.getText(),
                     txtSupplierName.getText(),
                     Integer.parseInt(txtSupplierContact.getText()),
