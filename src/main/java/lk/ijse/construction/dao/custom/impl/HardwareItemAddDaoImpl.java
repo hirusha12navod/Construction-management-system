@@ -1,6 +1,5 @@
 package lk.ijse.construction.dao.custom.impl;
 
-import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemCategoryDto;

@@ -14,8 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.HardwareCustomerBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.HardwareCustomerDto;
 
@@ -42,8 +43,8 @@ public class HardwareCustomerRegController {
     public JFXButton btnSearchOnAction;
     public JFXComboBox cmbCId;
 
-    HardwareCustomerDao hardwareCustomerDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
-
+//    HardwareCustomerDao hardwareCustomerDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
+    HardwareCustomerBo hardwareCustomerBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_CUSTOMER_BO);
     @FXML
     void initialize() {
         idGen();
@@ -64,7 +65,7 @@ public class HardwareCustomerRegController {
     private void loadCustomerIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = hardwareCustomerDao.loadIds();
+            List<String> ids = hardwareCustomerBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -81,7 +82,7 @@ public class HardwareCustomerRegController {
         String id=String.valueOf(cmbCId.getValue());
 
         try {
-            HardwareCustomerDto customer = hardwareCustomerDao.searchById(id);
+            HardwareCustomerDto customer = hardwareCustomerBo.searchById(id);
             txtCName.setText(customer.getName());
             lblCustomerId.setText(customer.getCustomer_Id());
             txtConNo.setText(customer.getContact());

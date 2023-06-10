@@ -14,8 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.bo.custom.BillBo;
 import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.HardwareCustomerBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.db.DBconnection;
@@ -55,11 +55,12 @@ public class HardwareSalesBillController {
     String SerialId="";
 
 //    BillDao billDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.BILL_DAO);
-    HardwareCustomerDao hardwareCustomerDao =DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
+//    HardwareCustomerDao hardwareCustomerDao =DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_CUSTOMER_DAO);
     HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
     ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
 
     BillBo billBo = BoFactory.getInstance().getBo(BoFactory.BoType.BILL_BO);
+    HardwareCustomerBo hardwareCustomerBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_CUSTOMER_BO);
 
     @FXML
     void initialize(){
@@ -85,10 +86,10 @@ public class HardwareSalesBillController {
 
     private void loadCusIds() {
         try {
-            List<String> ids = hardwareCustomerDao.loadIds();
+            List<String> ids = hardwareCustomerBo.loadIds();
             ObservableList<String> names = FXCollections.observableArrayList();
             for (String id : ids) {
-                names.add(hardwareCustomerDao.getName(id));
+                names.add(hardwareCustomerBo.getName(id));
             }
             cmbBillCustomer.setItems(names);
         } catch (SQLException | ClassNotFoundException e) {

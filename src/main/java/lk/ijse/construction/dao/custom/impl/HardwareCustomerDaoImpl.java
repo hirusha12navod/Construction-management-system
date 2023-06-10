@@ -2,7 +2,7 @@ package lk.ijse.construction.dao.custom.impl;
 
 import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.model.HardwareCustomerDto;
+import lk.ijse.construction.entity.Customer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,41 +15,40 @@ public class HardwareCustomerDaoImpl implements HardwareCustomerDao {
 
 
     @Override
-    public List<HardwareCustomerDto> getAll() throws SQLException {
+    public List<Customer> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM customer";
 
-        List<HardwareCustomerDto> data = new ArrayList<>();
+        List<Customer> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while (resultSet.next()) {
-            data.add(new HardwareCustomerDto(
+            data.add(new Customer(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4)
+                    resultSet.getInt(3)
             ));
         }
         return data;
     }
 
     @Override
-    public HardwareCustomerDto get() throws SQLException, ClassNotFoundException {
+    public Customer get() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(HardwareCustomerDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Customer dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(HardwareCustomerDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Customer dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean exists(HardwareCustomerDto hardwareCustomerDto) throws SQLException, ClassNotFoundException {
+    public boolean exists(Customer hardwareCustomerDto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -76,18 +75,17 @@ public class HardwareCustomerDaoImpl implements HardwareCustomerDao {
         return data;
     }
     @Override
-    public HardwareCustomerDto searchById(String id) throws SQLException {
+    public Customer searchById(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         PreparedStatement pstm = con.prepareStatement("SELECT * FROM customer WHERE customer_Id = ?");
         pstm.setString(1, id);
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return  new HardwareCustomerDto(
+            return  new Customer(
                     resultSet.getString(1),
                     resultSet.getString(2),
-                    resultSet.getString(1),
-                    resultSet.getString(3)
+                    resultSet.getInt(3)
             );
         }
         return null;
