@@ -1,6 +1,5 @@
-package lk.ijse.construction.bo.custom;
+package lk.ijse.construction.bo;
 
-import lk.ijse.construction.bo.SuperBo;
 import lk.ijse.construction.bo.custom.impl.BillBoImpl;
 import lk.ijse.construction.bo.custom.impl.ConstructionBoImpl;
 import lk.ijse.construction.bo.custom.impl.EmployeeBoImpl;
@@ -16,7 +15,7 @@ public class BoFactory {
         return boFactory!=null? boFactory:(boFactory=new BoFactory());
     }
     public enum BoType{
-        BILL_BO,CONSTRUCTION_BO,EMPLOYEE_BO
+        BILL_BO,CONSTRUCTION_BO,EMPLOYEE_BO,END_SITE_BO
     }
     public <T extends SuperBo>T getBo(BoType type){
         switch (type){

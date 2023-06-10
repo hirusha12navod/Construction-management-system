@@ -13,8 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.EndSiteBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.EndSiteDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.EndSiteDto;
 
@@ -39,8 +40,8 @@ public class SiteEndFormController {
     public Button btnSiteCalculateOnAction;
     public JFXComboBox cmbSiteName;
 
-    EndSiteDao endSiteDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.END_SITE_DAO);
-
+//    EndSiteDao endSiteDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.END_SITE_DAO);
+    EndSiteBo endSiteBo = BoFactory.getInstance().getBo(BoFactory.BoType.END_SITE_BO);
 
 
     @FXML
@@ -58,7 +59,7 @@ public class SiteEndFormController {
 
         try{
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = endSiteDao.loadIds();
+            List<String> ids = endSiteBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);
@@ -120,7 +121,7 @@ public class SiteEndFormController {
         String id=String.valueOf(cmbSiteName.getValue());
 
         try {
-            EndSiteDto Esite = endSiteDao.searchById(id);
+            EndSiteDto Esite = endSiteBo.searchById(id);
             if (Esite!=null) {
                 lblSiteStartDate.setText(Esite.getStart_date());
             }

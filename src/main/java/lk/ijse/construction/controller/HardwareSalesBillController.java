@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.construction.bo.custom.BillBo;
-import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.dao.DaoFactory;
 import lk.ijse.construction.dao.custom.HardwareCustomerDao;
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;

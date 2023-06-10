@@ -13,7 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.EmployeeBo;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.EmployeeDto;

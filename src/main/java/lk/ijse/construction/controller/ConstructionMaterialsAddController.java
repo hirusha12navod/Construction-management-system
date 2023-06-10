@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.ConstructionBo;
 
 import java.io.IOException;

@@ -2,6 +2,7 @@ package lk.ijse.construction.dao.custom.impl;
 
 import lk.ijse.construction.dao.custom.EndSiteDao;
 import lk.ijse.construction.db.DBconnection;
+import lk.ijse.construction.entity.EndSite;
 import lk.ijse.construction.model.EndSiteDto;
 
 import java.sql.*;
@@ -13,15 +14,15 @@ public class EndSiteDaoImpl implements EndSiteDao {
 
 
     @Override
-    public List<EndSiteDto> getAll() throws SQLException {
+    public List<EndSite> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT site_name,start_date FROM site";
 
-        List<EndSiteDto> data = new ArrayList<>();
+        List<EndSite> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while (resultSet.next()) {
-            data.add(new EndSiteDto(
+            data.add(new EndSite(
                     resultSet.getString(1),
                     resultSet.getString(2)
             ));
@@ -30,22 +31,22 @@ public class EndSiteDaoImpl implements EndSiteDao {
     }
 
     @Override
-    public EndSiteDto get() throws SQLException, ClassNotFoundException {
+    public EndSite get() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(EndSiteDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(EndSite dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(EndSiteDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(EndSite dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean exists(EndSiteDto endSiteDto) throws SQLException, ClassNotFoundException {
+    public boolean exists(EndSite endSiteDto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -71,7 +72,7 @@ public class EndSiteDaoImpl implements EndSiteDao {
         return data;
     }
     @Override
-    public EndSiteDto searchById(String id) throws SQLException {
+    public EndSite searchById(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT site_name,start_date FROM site WHERE site_name = ?");
@@ -79,7 +80,7 @@ public class EndSiteDaoImpl implements EndSiteDao {
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return  new EndSiteDto(
+            return  new EndSite(
                     resultSet.getString(1),
                     resultSet.getString(2)
             );

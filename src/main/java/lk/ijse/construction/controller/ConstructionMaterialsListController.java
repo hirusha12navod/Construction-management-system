@@ -11,7 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.bo.custom.BoFactory;
+import lk.ijse.construction.bo.BoFactory;
 import lk.ijse.construction.bo.custom.ConstructionBo;
 import lk.ijse.construction.model.MaterialDto;
 import lk.ijse.construction.model.tm.MaterialTm;
