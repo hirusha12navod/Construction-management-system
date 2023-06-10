@@ -12,11 +12,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.HardwareItemAddDao;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.HardwareItemAddBo;
 import lk.ijse.construction.db.DBconnection;
 
 import java.awt.*;
@@ -43,7 +42,8 @@ public class HardwareItemAddController extends Component {
     public JFXComboBox cmbItemCategory;
     public JFXButton btnBackOnAction;
 
-    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+//    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+    HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
 
     @FXML
     private AnchorPane root;
@@ -56,7 +56,7 @@ public class HardwareItemAddController extends Component {
     private void loadItemCatogories() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = hardwareItemAddDao.loadIds();
+            List<String> ids = hardwareItemAddBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);

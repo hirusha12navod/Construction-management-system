@@ -11,8 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.HardwareItemAddBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.model.ItemLDto;
 
@@ -28,14 +29,16 @@ public class HardwareItemSearchController {
     public AnchorPane searchItemspane;
     public JFXButton back;
 
-    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+//    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
     ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
+
+    HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
 
     @FXML
     public void initialize(){
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = hardwareItemAddDao.loadIds();
+            List<String> ids = hardwareItemAddBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);

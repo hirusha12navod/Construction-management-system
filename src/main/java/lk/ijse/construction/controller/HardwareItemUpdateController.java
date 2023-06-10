@@ -13,14 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.construction.bo.BoFactory;
+import lk.ijse.construction.bo.custom.HardwareItemAddBo;
 import lk.ijse.construction.dao.DaoFactory;
-import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.dao.custom.ItemListDao;
 import lk.ijse.construction.dao.custom.SupplierDao;
 import lk.ijse.construction.db.DBconnection;
 import lk.ijse.construction.model.ItemLDto;
 import lk.ijse.construction.model.ItemsDto;
-import lk.ijse.construction.model.SupplierDto;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,9 +41,11 @@ public class HardwareItemUpdateController {
     public Label lblDate;
     public TextField txtQty;
 
-    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
+//    HardwareItemAddDao hardwareItemAddDao= DaoFactory.getInstance().getDao(DaoFactory.DaoType.HARDWARE_ITEMS_ADD_DAO);
     ItemListDao itemListDao = DaoFactory.getInstance().getDao(DaoFactory.DaoType.ITEM_LIST_DAO);
     SupplierDao supplierDao  = DaoFactory.getInstance().getDao(DaoFactory.DaoType.SUPPLIER_DAO);
+
+    HardwareItemAddBo hardwareItemAddBo = BoFactory.getInstance().getBo(BoFactory.BoType.HARDWARE_ITEM_ADD_BO);
 
     @FXML
     void initialize() {
@@ -65,7 +67,7 @@ public class HardwareItemUpdateController {
     private void loadCatIds() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> ids = hardwareItemAddDao.loadIds();
+            List<String> ids = hardwareItemAddBo.loadIds();
 
             for (String id : ids) {
                 obList.add(id);

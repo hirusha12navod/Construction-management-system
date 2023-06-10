@@ -2,7 +2,7 @@ package lk.ijse.construction.dao.custom.impl;
 
 import lk.ijse.construction.dao.custom.HardwareItemAddDao;
 import lk.ijse.construction.db.DBconnection;
-import lk.ijse.construction.model.ItemCategoryDto;
+import lk.ijse.construction.entity.Category;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,15 +14,15 @@ public class HardwareItemAddDaoImpl implements HardwareItemAddDao {
 
 
     @Override
-    public List<ItemCategoryDto> getAll() throws SQLException {
+    public List<Category> getAll() throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
         String sql = "SELECT * FROM category";
 
-        List<ItemCategoryDto> data = new ArrayList<>();
+        List<Category> data = new ArrayList<>();
 
         ResultSet resultSet = con.createStatement().executeQuery(sql);
         while (resultSet.next()) {
-            data.add(new ItemCategoryDto(
+            data.add(new Category(
                     resultSet.getString(1)
             ));
         }
@@ -30,22 +30,22 @@ public class HardwareItemAddDaoImpl implements HardwareItemAddDao {
     }
 
     @Override
-    public ItemCategoryDto get() throws SQLException, ClassNotFoundException {
+    public Category get() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public boolean save(ItemCategoryDto dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Category dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(ItemCategoryDto dto) throws SQLException, ClassNotFoundException {
+    public boolean update(Category dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean exists(ItemCategoryDto itemCategoryDto) throws SQLException, ClassNotFoundException {
+    public boolean exists(Category itemCategoryDto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -71,7 +71,7 @@ public class HardwareItemAddDaoImpl implements HardwareItemAddDao {
         return data;
     }
     @Override
-    public ItemCategoryDto searchById(String id) throws SQLException {
+    public Category searchById(String id) throws SQLException {
         Connection con = DBconnection.getInstance().getConnection();
 
         PreparedStatement pstm = con.prepareStatement("SELECT * FROM category WHERE item_category = ?");
@@ -79,7 +79,7 @@ public class HardwareItemAddDaoImpl implements HardwareItemAddDao {
 
         ResultSet resultSet = pstm.executeQuery();
         if(resultSet.next()) {
-            return  new ItemCategoryDto(
+            return  new Category(
                     resultSet.getString(1)
             );
         }
